@@ -1,6 +1,20 @@
-#c0r14, #c1r14, #c2r14, #c3r14 {
+#c0r14h, #c1r14h, #c2r14h, #c3r14h, #c0r13h, #c1r13h,#c2r13h,#c3r13h {
     top: 12px;
     width: 168px;
     left: 61px;
 }
 
+#c0r14v, #c1r14v, #c2r14v, #c3r14v, #c4r14v {
+    height: 21px;
+    width: 0px;
+    bottom: 26px;
+    left: 29px;
+}
+
+#c4r14v{
+    bottom: 24px;
+}
+
+#c0r13h,#c1r13h,#c2r13h,#c3r13h{
+    top: 9px;
+}
