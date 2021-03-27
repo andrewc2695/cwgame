@@ -1,7 +1,16 @@
-#c0r14h, #c1r14h, #c2r14h, #c3r14h, #c0r13h, #c1r13h,#c2r13h,#c3r13h,#c0r12h,#c2r12h  {
+#c0r14h, #c1r14h, #c2r14h, #c3r14h, #c0r13h, #c1r13h,#c2r13h,#c3r13h,#c0r12h,#c2r12h,#c0r11h,#c4r11h  {
     top: 12px;
     width: 168px;
     left: 61px;
+}
+
+#c0r11h, #c4r11h{
+   width: 172px;
+}
+
+#c4r11h{
+    left: -175px;
+    top: 10px;
 }
 
 #c0r14v, #c1r14v, #c2r14v, #c3r14v, #c4r14v, #c2r13v {
