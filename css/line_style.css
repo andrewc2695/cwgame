@@ -5,7 +5,7 @@
 }
 
 #c0r11h, #c4r11h{
-   width: 172px;
+   width: 171px;
 }
 
 #c4r11h{
@@ -28,10 +28,19 @@
     top: 9px;
 }
 
-#c0r13v, #c4r13v {
+#c0r13v, #c4r13v, #c0r12v, #c5r11v {
     top: -31px;
     height: 22px;
 }
+
+#c0r12v{
+    top: -26px;
+}
+
+#c5r11v{
+    top: -24px;
+}
+
 
  #c4r13v{
      top: -25px;
@@ -106,3 +115,32 @@
     transform-origin: right;
 }
 
+#c1r12v{
+    height: 10px;
+    width: 0px;
+    left: 25px;
+    bottom: 21px;
+}
+#c0r11v{
+    height: 10px;
+    width: 0px;
+    left: 27px;
+    bottom: 15px;
+}
+
+#c3r11v{
+    height: 9px;
+    width: 0px;
+    left: 24px;
+    bottom: 12px;
+}
+#c4r11v{
+    height: 10px;
+    width: 0px;
+    left: 31px;
+    bottom: 16px;
+}
+
+#c5r11v{
+
+}
