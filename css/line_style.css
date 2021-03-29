@@ -141,6 +141,49 @@
     bottom: 16px;
 }
 
-#c5r11v{
-
+#c2r10dl{
+    right: 183px;
+    top: 23px;
+    width: 181px;
+    transform: rotate(
+-15deg
+);
+transform-origin: right;
 }
+
+#c2r10dr{
+    right: -50px;
+    top: 17px;
+    width: 186px;
+    transform: rotate(
+15deg
+);
+    transform-origin: left;
+}
+#c2r10ur{
+    right: -50px;
+    top: 19px;
+    width: 181px;
+    transform: rotate(-15deg);
+    transform-origin: left;
+}
+
+#c3r10ul{
+    right: 183px;
+    top: 21px;
+    width: 181px;
+    transform: rotate(
+15deg
+);
+    transform-origin: right;
+}
+#c3r10dl{
+    right: 188px;
+    top: 23px;
+    width: 185px;
+    transform: rotate(
+-15deg
+);
+    transform-origin: right;
+}
+
