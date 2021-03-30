@@ -1,0 +1,27 @@
+{
+  "name": "chinese_war_game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --mode=development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewc2695/cwgame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewc2695/cwgame/issues"
+  },
+  "homepage": "https://github.com/andrewc2695/cwgame#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "webpack": "^5.28.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.6.0"
+  }
+}

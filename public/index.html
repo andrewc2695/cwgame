@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/line_style.css">
+    <!-- <script src="game.js"></script> -->
+    <title>Document</title>
+</head>
+<body>
+    <div id="board">
+        <div class="row" id="row0">
+            <div class="square" id="r0c0">
+                <div class="line" id="c0r14h"></div>
+            </div>
+            <div class="square" id="r0c1">
+                <div class="line" id="c0r14h"></div>
+            </div>
+            <div class="square" id="r0c2">
+                <div class="line" id="c0r14h"></div>
+            </div>
+            <div class="square" id="r0c3">
+                <div class="line" id="c0r14h"></div>
+            </div>
+            <div class="square" id="r0c4"></div>
+        </div>
+        <div class="row" id="row1">
+            <div class="square" id="r1c0">
+                <div class="line candy-cane" id="c0r13h"></div>
+                <div class="line" id="c0r1v"></div>
+            </div>
+            <div class="square" id="r1c1">
+                <div class="line candy-cane" id="c0r13h"></div>
+                <div class="line" id="c0r1v"></div>
+            </div>
+            <div class="square" id="r1c2">
+                <div class="line candy-cane" id="c0r13h"></div>
+                <div class="line" id="c0r1v"></div>
+            </div>
+            <div class="square" id="r1c3">
+                <div class="line candy-cane" id="c0r13h"></div>
+                <div class="line" id="c0r1v"></div>
+            </div>
+            <div class="square" id="r1c4">
+                <div class="line" id="c0r4v"></div>
+            </div>
+        </div>
+        <div class="row" id="row2">
+            <div class="square" id="r2c0">
+                <div class="line" id="c0r11h"></div>
+                <div class="line candy-cane-vert" id="c0r12v"></div>
+            </div>
+            <div class="circle" id="r2c1">
+                <div class="line" id="c1r12h"></div>
+                <div class="line" id="c2r10dl"></div>
+                <div class="line" id="c1r12ul"></div>
+                <div class="line" id="c2r10ur"></div>
+                <div class="line" id="c2r10dr"></div>
+                <div class="line" id="c1r12v"></div>
+            </div>
+            <div class="square" id="r2c2">
+                <div class="line" id="c0r11h"></div>
+                <div class="line" id="c2r14v"></div>
+            </div>
+            <div class="circle" id="r2c3">
+                <div class="line" id="c3r12h"></div>
+                <div class="line" id="c3r10dl"></div>
+                <div class="line" id="c3r10ul"></div>
+                <div class="line" id="c3r12ur"></div>
+                <div class="line" id="c1r12dr"></div>
+                <div class="line" id="c1r12v"></div>
+            </div>
+            <div class="square" id="r2c4">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row3">
+            <div class="square" id="r3c0">
+                <div class="line" id="c0r11h"></div>
+                <div class="line candy-cane-vert" id="c0r12v"></div>
+            </div>
+            <div class="square" id="r3c1">
+                <div class="line" id="c0r11h"></div>
+                <div class="line" id="c0r11v"></div>
+            </div>
+            <div class="circle" id="r3c2">
+                <div class="line" id="c3r11v"></div>
+            </div>
+            <div class="square" id="r3c3">
+                <div class="line" id="c0r11h"></div>
+                <div class="line" id="c4r11h"></div>
+                <div class="line" id="c4r11v"></div>
+            </div>
+            <div class="square" id="r3c4">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row4">
+            <div class="square" id="r4c0">
+                <div class="line" id="c0r12h"></div>
+                <div class="line candy-cane-vert" id="c0r12v"></div>
+            </div>
+            <div class="circle" id="r4c1">
+                <div class="line" id="c1r12h"></div>
+                <div class="line" id="c1r12dl"></div>
+                <div class="line" id="c1r12ul"></div>
+                <div class="line" id="c1r12ur"></div>
+                <div class="line" id="c1r12dr"></div>
+                <div class="line" id="c1r12v"></div>
+            </div>
+            <div class="square" id="r4c2">
+                <div class="line" id="c0r12h"></div>
+                <div class="line" id="c2r12v"></div>
+            </div>
+            <div class="circle" id="r4c3">
+                <div class="line" id="c3r12h"></div>
+                <div class="line" id="c1r12dl"></div>
+                <div class="line" id="c3r12ul"></div>
+                <div class="line" id="c3r12ur"></div>
+                <div class="line" id="c1r12dr"></div>
+                <div class="line" id="c1r12v"></div>
+            </div>
+            <div class="square" id="r4c4">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row5">
+            <div class="square" id="r5c0">
+                <div class="line candy-cane" id="c0r13h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r5c1">
+                <div class="line candy-cane" id="c1r13h"></div>
+                <div class="line" id="c1r13v"></div>
+            </div>
+            <div class="square" id="r5c2">
+                <div class="line candy-cane" id="c2r13h"></div>
+                <div class="line" id="c2r13v"></div>
+            </div>
+            <div class="square" id="r5c3">
+                <div class="line candy-cane" id="c1r13h"></div>
+                <div class="line" id="c1r13v"></div>
+            </div>
+            <div class="square" id="r5c4">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row6">
+            <div class="square" id="r6c0">
+                <div class="line candy-cane" id="c0r9h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r6c1">
+                <div class="line candy-cane" id="c0r9h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r6c2">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row7">
+            <div class="square" id="r7c0">
+                <div class="line candy-cane" id="c0r9h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r7c1">
+                <div class="line candy-cane" id="c0r9h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r7c2">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row8">
+            <div class="square" id="r8c0">
+                <div class="line candy-cane" id="c0r9h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r8c1">
+                <div class="line candy-cane" id="c0r9h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r8c2">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row9">
+            <div class="square" id="r9c0">
+                <div class="line candy-cane" id="c0r13h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r9c1">
+                <div class="line candy-cane" id="c0r13h"></div>
+            </div>
+            <div class="square" id="r9c2">
+                <div class="line candy-cane" id="c0r13h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r9c3">
+                <div class="line candy-cane" id="c0r13h"></div>
+            </div>
+            <div class="square" id="r9c4">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row10">
+            <div class="square" id="r10c0">
+                <div class="line" id="c0r11h"></div>
+                <div class="line candy-cane-vert" id="c0r12v"></div>
+            </div>
+            <div class="circle" id="r10r11">
+                <div class="line" id="c1r12h"></div>
+                <div class="line" id="c2r10dl"></div>
+                <div class="line" id="c1r12ul"></div>
+                <div class="line" id="c2r10ur"></div>
+                <div class="line" id="c2r10dr"></div>
+                <div class="line" id="c1r12v"></div>
+            </div>
+            <div class="square" id="r10c2">
+                <div class="line" id="c1r14h"></div>
+                <div class="line" id="c2r14v"></div>
+            </div>
+            <div class="circle" id="r10c3">
+                <div class="line" id="c3r12h"></div>
+                <div class="line" id="c3r10dl"></div>
+                <div class="line" id="c3r10ul"></div>
+                <div class="line" id="c3r12ur"></div>
+                <div class="line" id="c1r12dr"></div>
+                <div class="line" id="c1r12v"></div>
+            </div>
+            <div class="square" id="r10c4">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row11">
+            <div class="square" id="r11c0">
+                <div class="line" id="c0r11h"></div>
+                <div class="line candy-cane-vert" id="c0r12v"></div>
+            </div>
+            <div class="square" id="r11c1">
+                <div class="line" id="c0r11h"></div>
+                <div class="line" id="c0r11v"></div>
+            </div>
+            <div class="circle" id="r11c2">
+                <div class="line" id="c3r11v"></div>
+            </div>
+            <div class="square" id="r11c3">
+                <div class="line" id="c0r11h"></div>
+                <div class="line" id="c4r11h"></div>
+                <div class="line" id="c4r11v"></div>
+            </div>
+            <div class="square" id="r11c4">
+                <div class="line candy-cane-vert" id="c5r11v"></div>
+            </div>
+        </div>
+        <div class="row" id="row12">
+            <div class="square" id="r12c0">
+                <div class="line" id="c0r12h"></div>
+                <div class="line candy-cane-vert" id="c0r12v"></div>
+            </div>
+            <div class="circle" id="r12c1">
+                <div class="line" id="c1r12h"></div>
+                <div class="line" id="c1r12dl"></div>
+                <div class="line" id="c1r12ul"></div>
+                <div class="line" id="c1r12ur"></div>
+                <div class="line" id="c1r12dr"></div>
+                <div class="line" id="c1r12v"></div>
+            </div>
+            <div class="square" id="r12c2">
+                <div class="line" id="c2r12h"></div>
+                <div class="line" id="c2r12v"></div>
+            </div>
+            <div class="circle" id="r12c3">
+                <div class="line" id="c3r12h"></div>
+                <div class="line" id="c1r12dl"></div>
+                <div class="line" id="c3r12ul"></div>
+                <div class="line" id="c3r12ur"></div>
+                <div class="line" id="c1r12dr"></div>
+                <div class="line" id="c1r12v"></div>
+            </div>
+            <div class="square" id="r12c4">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row13">
+            <div class="square" id="r13c0">
+                <div class="line candy-cane" id="c0r13h"></div>
+                <div class="line candy-cane-vert" id="c0r13v"></div>
+            </div>
+            <div class="square" id="r13c1">
+                <div class="line candy-cane" id="c1r13h"></div>
+                <div class="line" id="c1r13v"></div>
+            </div>
+            <div class="square" id="r13c2">
+                <div class="line candy-cane" id="c2r13h"></div>
+                <div class="line" id="c2r13v"></div>
+            </div>
+            <div class="square" id="r13c3">
+                <div class="line candy-cane" id="c3r13h"></div>
+                <div class="line" id="c3r13v"></div>
+            </div>
+            <div class="square" id="r13c4">
+                <div class="line candy-cane-vert" id="c4r13v"></div>
+            </div>
+        </div>
+        <div class="row" id="row14">
+            <div class="square" id="r14c0">
+                <div class="line" id="c0r14h"></div>
+                <div class="line" id="c0r14v"></div>
+            </div>
+            <div class="square" id="r14c1">
+                <div class="line" id="c1r14h"></div>
+                <div class="line" id="c1r14v"></div>
+            </div>
+            <div class="square" id="r14c2">
+                <div class="line" id="c2r14h"></div>
+                <div class="line" id="c2r14v"></div>
+            </div>
+            <div class="square" id="r14c3">
+                <div class="line" id="c3r14h"></div>
+                <div class="line" id="c3r14v"></div>
+            </div>
+            <div class="square" id="r14c4">
+                <div class="line" id="c4r14v"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
