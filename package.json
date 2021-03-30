@@ -19,6 +19,7 @@
   "homepage": "https://github.com/andrewc2695/cwgame#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "socket.io": "^4.0.0",
     "webpack": "^5.28.0"
   },
   "devDependencies": {
