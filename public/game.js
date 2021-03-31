@@ -13,13 +13,12 @@ const pieces = {
     8: 1
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("hi");
-})
+class Game {
+    constructor(){
 
-let socket = io();
-
-window.onclick = function(e) {
-    socket.emit('message', 'chinese war game')
+    }
+    
 }
+
+
 
