@@ -5,3 +5,7 @@ socket.on('player', msg => {
     player = msg
 })
 
+window.onclick = function(e){
+    console.log("hi");
+}
+

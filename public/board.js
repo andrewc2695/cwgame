@@ -97,31 +97,7 @@ class Board {
     }
 
     getValidMoves = (start) => {
-        let moves = [];
-        let startTile = this.board[start[1], start[3]];
-        let directMoves = startTile.connects;
-        let movesQ = [];
-        while (directMoves.length > 0){
-            let movePos = directMoves[0].split(",");
-            let newtile = this.board[parseInt(movePos[0]), parseInt(movePos[1])];
-            moves.push(movePos)
-            if(startTile.candycane && newtile.candycane){
-                movesQ = movesQ.concat(newTile.connects);
-            };
-            directMoves.shift();
-        }
-        //check if starting on candy cane, if so add on other candy cane pieces connects[check for candy cane]
-        //if moving off cnady cane see if it is direct connect of starting piece if so valid if nto not valid
-        //have two checks one for first children and one for childrens children
-        while (movesQ.length > 0){
-            let movePos = movesQ[0].split(",");
-            let newtile = this.board[parseInt(newPos[0]), parseInt(newPos[1])];
-            moves.push(movePos)
-            if (startTile.candycane && newtile.candycane) {
-                movesQ = movesQ.concat(newTile.connects);
-            };
-            
-        }
+        
     }
 }
 
