@@ -45,6 +45,36 @@ class Board {
                 new Tile({ row: 2, col: 3, piece: null, safe: true, candycane: false, connects: ['2, 2', '2, 4', '1, 3', '3, 3', '1, 2', '1, 4', '3, 2', '3, 4'] }),
                 new Tile({ row: 2, col: 4, piece: null, safe: false, candycane: true, connects: ['2, 3', '1, 4', '3, 4'] }),
             ],
+            [new Tile({ row: 5, col: 0, piece: null, safe: false, candycane: true, connects: ['5, 1', '4, 0', '6, 0', '4, 1'] }),
+                new Tile({ row: 5, col: 1, piece: null, safe: false, candycane: true, connects: ['5, 0', '5, 2', '4, 1'] }),
+                new Tile({ row: 5, col: 2, piece: null, safe: false, candycane: true, connects: ['5, 1', '5, 3', '4, 2', '6, 1', '4, 1', '4, 3']}),
+                new Tile({ row: 5, col: 3, piece: null, safe: false, candycane: true, connects: ['5, 2', '5, 4', '4, 3'] }),
+                new Tile({ row: 5, col: 4, piece: null, safe: false, candycane: true, connects: ['5, 3', '4, 4', '6, 2', '4, 3']})
+            ],
+            [new Tile({row: 6, col: 0, piece: null, safe: false, candycane: true, connects: ['6, 1', '5, 0', '7, 0']}),
+                new Tile({row: 6, col: 1, piece: null, safe: false, candycane: true, connects: ['6, 0', '6, 2', '5, 2', '7, 1']}),
+                new Tile({row: 6, col: 2, piece: null, safe: false, candycane: true, connects: ['6, 1', '5, 4', '7, 2']})
+            ],
+            [new Tile({ row: 7, col: 0, piece: null, safe: false, candycane: true, connects: ['7, 1', '6, 0', '8, 0'] }),
+                new Tile({ row: 7, col: 1, piece: null, safe: false, candycane: true, connects: ['7, 0', '7, 2', '6, 1', '8, 1'] }),
+                new Tile({ row: 7, col: 2, piece: null, safe: false, candycane: true, connects: ['7, 1', '6, 2', '8, 2'] })
+            ],
+            [new Tile({ row: 8, col: 0, piece: null, safe: false, candycane: true, connects: ['8, 1', '7, 0', '9, 0'] }),
+                new Tile({ row: 8, col: 1, piece: null, safe: false, candycane: true, connects: ['8, 0', '8, 2', '7, 1', '9, 2'] }),
+                new Tile({ row: 7, col: 2, piece: null, safe: false, candycane: true, connects: ['8, 1', '6, 2', '9, 4'] })
+            ],
+            [new Tile({ row: 9, col: 0, piece: null, safe: false, candycane: true, connects: ['9, 1', '10, 0', '8, 0', '10, 1'] }),
+                new Tile({ row: 9, col: 1, piece: null, safe: false, candycane: true, connects: ['9, 0', '9, 2', '10, 1'] }),
+                new Tile({ row: 9, col: 2, piece: null, safe: false, candycane: true, connects: ['9, 1', '9, 3', '8, 1', '10, 2', '10, 1', '10, 3'] }),
+                new Tile({ row: 9, col: 3, piece: null, safe: false, candycane: true, connects: ['9, 2', '9, 4', '10, 3'] }),
+                new Tile({ row: 9, col: 4, piece: null, safe: false, candycane: true, connects: ['9, 3', '8, 2', '10, 2', '10, 3'] })
+            ],
+            [new Tile({ row: 10, col: 0, piece: null, safe: false, candycane: true, connects: ['10, 1', '9, 0', '11, 0'] }),
+                new Tile({ row: 10, col: 1, piece: null, safe: true, candycane: false, connects: ['10, 0', '10, 2', '9, 1', '11, 1', '9, 0', '9, 2', '11, 0', '11, 2'] }),
+                new Tile({ row: 10, col: 2, piece: null, safe: false, candycane: false, connects: ['4, 1', '4, 3', '3, 2', '3, 2'] }),
+                new Tile({ row: 2, col: 3, piece: null, safe: true, candycane: false, connects: ['2, 2', '2, 4', '1, 3', '3, 3', '1, 2', '1, 4', '3, 2', '3, 4'] }),
+                new Tile({ row: 2, col: 4, piece: null, safe: false, candycane: true, connects: ['2, 3', '1, 4', '3, 4'] }),
+            ],
         ]
     }
 }
