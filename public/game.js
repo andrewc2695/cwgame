@@ -15,10 +15,10 @@ const pieces = {
 
 class Game {
     constructor(){
-
+        
     }
 
-    
+
 }
 
 

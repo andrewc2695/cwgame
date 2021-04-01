@@ -108,6 +108,10 @@ class Board {
         ]
     }
 
+    setUpBoard(){
+        
+    }
+
     getValidMoves = (start) => {
         let startTile = this.board[start[0]][start[1]];
         let moves = [];

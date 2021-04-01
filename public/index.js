@@ -18,6 +18,7 @@ for(let i = 0; i < squares.length; i++){
 for (let i = 0; i < circles.length; i++) {
     circles[i].addEventListener("click", () => handleClick(circles[i].id))
 }
+//have p2 ready vairable when it is true invoke start game function
 
 // function handleClick(clickId){
 //     moves = gameBoard.getValidMoves(clickId.split(" "));
