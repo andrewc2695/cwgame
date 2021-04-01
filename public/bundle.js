@@ -111,10 +111,16 @@ socket.on('player', msg => {
     player = msg
 })
 
-window.onclick = function(e){
-    console.log("hi");
+
+
+const squares = document.getElementsByClassName("square");
+for(let i = 0; i < squares.length; i++){
+    squares[i].addEventListener("click", () => handleClick(squares[i].id))
 }
 
+function handleClick(clickId){
+    console.log(clickId.split(" "));
+}
 
 },{"./board.js":1}],3:[function(require,module,exports){
 class Tile {

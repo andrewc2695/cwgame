@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --mode=development --watch",
-    "build": "browserify ./public/index.js -o bundle.js"
+    "build": "browserify ./public/index.js -o ./public/bundle.js"
   },
   "repository": {
     "type": "git",
