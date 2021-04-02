@@ -106,8 +106,42 @@ class Board {
                 new Tile({ row: 14, col: 3, piece: null, safe: false, candycane: false, connects: ['14, 2', '14, 4', '13, 3'] }),
                 new Tile({ row: 14, col: 4, piece: null, safe: false, candycane: false, connects: ['14, 3', '13, 4'] })
             ], 
-        ]
+        ];
+        this.pieces = {
+            "flag": 1,
+            "mine": 3,
+            "bomb": 2,
+            "engineer": 3,
+            "1": 3,
+            "2": 3,
+            "3": 2,
+            "4": 2,
+            "5": 2,
+            "6": 2,
+            "7": 1,
+            "8": 1
+        };
     }
+
+    placePiece = (e) => {
+        let remainingPieces = Object.keys(this.pieces)
+        let pieceList = document.createElement("ul");
+        remainingPieces.forEach(piece => {
+            let li = document.createElement("li");
+            li.innerHTML = piece;
+            pieceList.appendChild(li);
+        });
+        e.currentTarget.appendChild(pieceList);
+    }
+
+    setUpBoard = () => {
+        let myTiles = document.getElementsByClassName("p1");
+
+        for(let i = 0; i < myTiles.length; i++){
+            myTiles[i].addEventListener("click", (e) => this.placePiece(e))
+        }
+    }
+
 
     getValidMoves = (start) => {
         let startTile = this.board[start[0]][start[1]];
@@ -145,29 +179,33 @@ socket.on('player', msg => {
     player = msg
 })
 
+let highlightedTiles = [];
 
 const gameBoard = new Board();
-const squares = document.getElementsByClassName("square");
+gameBoard.setUpBoard();
+// const squares = document.getElementsByClassName("square");
 
-const circles = document.getElementsByClassName("circle")
+// const circles = document.getElementsByClassName("circle")
 
-for(let i = 0; i < squares.length; i++){
-    squares[i].addEventListener("click", () => handleClick(squares[i].id))
-}
-for (let i = 0; i < circles.length; i++) {
-    circles[i].addEventListener("click", () => handleClick(circles[i].id))
-}
+// for(let i = 0; i < squares.length; i++){
+//     squares[i].addEventListener("click", () => handleClick(squares[i].id))
+// }
+// for (let i = 0; i < circles.length; i++) {
+//     circles[i].addEventListener("click", () => handleClick(circles[i].id))
+// }
+//have p2 ready vairable when it is true invoke start game function
 
-function handleClick(clickId){
-    moves = gameBoard.getValidMoves(clickId.split(" "));
-    moves.forEach(move => {
-        move = move.split(",").join("");
-        console.log(move);
-        validMove = document.getElementById(String(move));
-        validMove.style.boxShadow = "0px 0px 10px 5px yellow";
-    })
+// function handleClick(clickId){
+//     moves = gameBoard.getValidMoves(clickId.split(" "));
+//     moves.forEach(move => {
+//         highlightedTiles.push(move)
+//         move = move.split(",").join("");
+//         console.log(move);
+//         validMove = document.getElementById(String(move));
+//         validMove.style.boxShadow = "0px 0px 10px 5px yellow";
+//     })
     
-}
+// }
 
 },{"./board.js":1}],3:[function(require,module,exports){
 class Tile {

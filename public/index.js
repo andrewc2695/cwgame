@@ -8,6 +8,7 @@ socket.on('player', msg => {
 let highlightedTiles = [];
 
 const gameBoard = new Board();
+gameBoard.setUpBoard();
 // const squares = document.getElementsByClassName("square");
 
 // const circles = document.getElementsByClassName("circle")
