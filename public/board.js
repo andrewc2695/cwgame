@@ -111,27 +111,38 @@ class Board {
             "mine": 3,
             "bomb": 2,
             "engineer": 3,
-            "1": 3,
-            "2": 3,
-            "3": 2,
-            "4": 2,
-            "5": 2,
-            "6": 2,
-            "7": 1,
-            "8": 1
+            1: 3,
+            2: 3,
+            3: 2,
+            4: 2,
+            5: 2,
+            6: 2,
+            7: 1,
+            8: 1
         };
+    }
+
+    closeWindow = (that, pieceList) => {
+        debugger
+        that.currentTarget.removeChild(pieceList);
     }
 
     placePiece = (e) => {
         let remainingPieces = Object.keys(this.pieces)
         let pieceList = document.createElement("ul");
-        pieceList.setAttribute('id', 'piece-list');
+        pieceList.setAttribute('class', 'piece-list');
         remainingPieces.forEach(piece => {
             let li = document.createElement("li");
+            li.setAttribute('class', 'piece-value');
             li.innerHTML = piece;
             pieceList.appendChild(li);
         });
         e.currentTarget.appendChild(pieceList);
+        let that = e.currentTarget;
+        debugger
+        setTimeout(() => {
+            document.addEventListener("click", (that, pieceList) => this.closeWindow(that, pieceList))
+        }, 10);
     }
 
     setUpBoard = (player) => {

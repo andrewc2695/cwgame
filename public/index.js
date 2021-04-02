@@ -6,7 +6,7 @@ socket.on('player', msg => {
     let highlightedTiles = [];
     console.log(player)
     const gameBoard = new Board();
-    gameBoard.setUpBoard(`p${player}`);
+    gameBoard.setUpBoard(`p1`);
 })
 
 // const squares = document.getElementsByClassName("square");
