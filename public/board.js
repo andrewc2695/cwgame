@@ -125,6 +125,7 @@ class Board {
     placePiece = (e) => {
         let remainingPieces = Object.keys(this.pieces)
         let pieceList = document.createElement("ul");
+        pieceList.setAttribute('id', 'piece-list');
         remainingPieces.forEach(piece => {
             let li = document.createElement("li");
             li.innerHTML = piece;
@@ -133,8 +134,8 @@ class Board {
         e.currentTarget.appendChild(pieceList);
     }
 
-    setUpBoard = () => {
-        let myTiles = document.getElementsByClassName("p1");
+    setUpBoard = (player) => {
+        let myTiles = document.getElementsByClassName(player);
 
         for(let i = 0; i < myTiles.length; i++){
             myTiles[i].addEventListener("click", (e) => this.placePiece(e))

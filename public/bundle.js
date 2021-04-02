@@ -126,6 +126,7 @@ class Board {
     placePiece = (e) => {
         let remainingPieces = Object.keys(this.pieces)
         let pieceList = document.createElement("ul");
+        pieceList.setAttribute('id', 'piece-list');
         remainingPieces.forEach(piece => {
             let li = document.createElement("li");
             li.innerHTML = piece;
@@ -134,8 +135,8 @@ class Board {
         e.currentTarget.appendChild(pieceList);
     }
 
-    setUpBoard = () => {
-        let myTiles = document.getElementsByClassName("p1");
+    setUpBoard = (player) => {
+        let myTiles = document.getElementsByClassName(player);
 
         for(let i = 0; i < myTiles.length; i++){
             myTiles[i].addEventListener("click", (e) => this.placePiece(e))
@@ -177,12 +178,12 @@ let socket = io();
 let player;
 socket.on('player', msg => {
     player = msg
+    let highlightedTiles = [];
+    console.log(player)
+    const gameBoard = new Board();
+    gameBoard.setUpBoard(`p${player}`);
 })
 
-let highlightedTiles = [];
-
-const gameBoard = new Board();
-gameBoard.setUpBoard();
 // const squares = document.getElementsByClassName("square");
 
 // const circles = document.getElementsByClassName("circle")

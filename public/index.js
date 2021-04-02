@@ -3,12 +3,12 @@ let socket = io();
 let player;
 socket.on('player', msg => {
     player = msg
+    let highlightedTiles = [];
+    console.log(player)
+    const gameBoard = new Board();
+    gameBoard.setUpBoard(`p${player}`);
 })
 
-let highlightedTiles = [];
-
-const gameBoard = new Board();
-gameBoard.setUpBoard();
 // const squares = document.getElementsByClassName("square");
 
 // const circles = document.getElementsByClassName("circle")

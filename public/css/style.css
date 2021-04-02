@@ -76,3 +76,17 @@
     left: 27px;
 }
 
+#piece-list{
+    width: 60px;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    z-index: 99;
+    position: relative;
+    left: -1px;
+    top: -3px;
+}
+
