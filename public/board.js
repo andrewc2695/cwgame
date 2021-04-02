@@ -109,7 +109,17 @@ class Board {
     }
 
     setUpBoard(){
-        
+        let pieces = ['flag', 'mine', 'mine', 'mine', 'bomb', 'bomb', 'engineer', 'engineer', 'engineer', '1', '1', '1', '2', '2', '2', '3', '3', '4', '4', '5', '5', '6', '6', '7', '8']
+        let myTiles = document.getElementsByClassName("p1");
+        function handleClick(){
+            let pieceList = document.createElement('ul')
+        }
+        for(let i = 0; i < myTiles.length; i++){
+            myTiles[0].addEventListener("click", () => {
+
+            })
+        }
+
     }
 
     getValidMoves = (start) => {

@@ -8,16 +8,16 @@ socket.on('player', msg => {
 let highlightedTiles = [];
 
 const gameBoard = new Board();
-const squares = document.getElementsByClassName("square");
+// const squares = document.getElementsByClassName("square");
 
-const circles = document.getElementsByClassName("circle")
+// const circles = document.getElementsByClassName("circle")
 
-for(let i = 0; i < squares.length; i++){
-    squares[i].addEventListener("click", () => handleClick(squares[i].id))
-}
-for (let i = 0; i < circles.length; i++) {
-    circles[i].addEventListener("click", () => handleClick(circles[i].id))
-}
+// for(let i = 0; i < squares.length; i++){
+//     squares[i].addEventListener("click", () => handleClick(squares[i].id))
+// }
+// for (let i = 0; i < circles.length; i++) {
+//     circles[i].addEventListener("click", () => handleClick(circles[i].id))
+// }
 //have p2 ready vairable when it is true invoke start game function
 
 // function handleClick(clickId){
