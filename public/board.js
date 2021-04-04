@@ -123,26 +123,27 @@ class Board {
     }
 
     closeWindow = (that, pieceList) => {
-        debugger
-        that.currentTarget.removeChild(pieceList);
+        let tile = document.getElementById(that);
+        tile.removeChild(pieceList);
     }
 
     placePiece = (e) => {
-        let remainingPieces = Object.keys(this.pieces)
-        let pieceList = document.createElement("ul");
-        pieceList.setAttribute('class', 'piece-list');
-        remainingPieces.forEach(piece => {
-            let li = document.createElement("li");
-            li.setAttribute('class', 'piece-value');
-            li.innerHTML = piece;
-            pieceList.appendChild(li);
-        });
-        e.currentTarget.appendChild(pieceList);
-        let that = e.currentTarget;
-        debugger
-        setTimeout(() => {
-            document.addEventListener("click", (that, pieceList) => this.closeWindow(that, pieceList))
-        }, 10);
+        if(e.target.classList[0] === "square"){
+            let remainingPieces = Object.keys(this.pieces)
+            let pieceList = document.createElement("ul");
+            pieceList.setAttribute('class', 'piece-list');
+            remainingPieces.forEach(piece => {
+                let li = document.createElement("li");
+                li.setAttribute('class', 'piece-value');
+                li.innerHTML = piece;
+                pieceList.appendChild(li);
+            });
+            e.currentTarget.appendChild(pieceList);
+            let that = e.currentTarget.id;
+            setTimeout(() => {
+                document.addEventListener("click", () => this.closeWindow(that, pieceList), {once: true});
+            }, 10, that, pieceList);
+        }
     }
 
     setUpBoard = (player) => {
