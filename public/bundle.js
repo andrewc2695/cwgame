@@ -129,7 +129,7 @@ class Board {
     }
 
     selectPiece = (e) => {
-        if(e.target.classList[0] === "square"){
+        if(e.target.classList[0] === "square" || e.target.classList[0] === "pieceValue"){
             let remainingPieces = Object.keys(this.pieces)
             let pieceList = document.createElement("ul");
             pieceList.setAttribute('class', 'piece-list');
@@ -150,14 +150,26 @@ class Board {
 
     placePiece = (e, piece) => {
         let pos = e.target.id.split(" ");
+        debugger;
         this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
         for(let i = 0; i < e.target.children.length; i++){
             if(e.target.children[i].className === "pieceValue"){
-                e.target.children[i].innerHTML = piece;
-                break
+                if(e.target.children[i].innerHTML !== ""){
+                   if( this.pieces[e.target.children[i].innerHTML] === undefined){
+                       this.pieces[e.target.children[i].innerHTML] = 1;
+                   }else{
+                       this.pieces[e.target.children[i].innerHTML]++;
+                   }
+                }else{
+                    e.target.children[i].innerHTML = piece;
+                    break
+                }
             }
         }
-        this.pieces[piece]
+        this.pieces[piece]--
+        if(this.pieces[piece] === 0){
+            delete this.pieces[piece];
+        }
     }
 
     setUpBoard = (player) => {
