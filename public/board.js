@@ -127,7 +127,7 @@ class Board {
         tile.removeChild(pieceList);
     }
 
-    placePiece = (e) => {
+    selectPiece = (e) => {
         if(e.target.classList[0] === "square"){
             let remainingPieces = Object.keys(this.pieces)
             let pieceList = document.createElement("ul");
@@ -137,6 +137,7 @@ class Board {
                 li.setAttribute('class', 'piece-value');
                 li.innerHTML = piece;
                 pieceList.appendChild(li);
+                li.addEventListener("click", () => this.placePiece(e, piece));
             });
             e.currentTarget.appendChild(pieceList);
             let that = e.currentTarget.id;
@@ -146,11 +147,23 @@ class Board {
         }
     }
 
+    placePiece = (e, piece) => {
+        let pos = e.target.id.split(" ");
+        this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
+        for(let i = 0; i < e.target.children.length; i++){
+            if(e.target.children[i].className === "pieceValue"){
+                e.target.children[i].innerHTML = piece;
+                break
+            }
+        }
+
+    }
+
     setUpBoard = (player) => {
         let myTiles = document.getElementsByClassName(player);
 
         for(let i = 0; i < myTiles.length; i++){
-            myTiles[i].addEventListener("click", (e) => this.placePiece(e))
+            myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
         }
     }
 
