@@ -156,7 +156,7 @@ class Board {
                 break
             }
         }
-
+        this.pieces[piece]
     }
 
     setUpBoard = (player) => {

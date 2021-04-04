@@ -100,3 +100,12 @@
 .piece-value:hover {
     background-color: lightgray;
 }
+
+.pieceValue{
+    position: relative;
+    top: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
