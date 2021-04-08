@@ -159,6 +159,7 @@ class Board {
     validPlacement(pos, piece) {
         if (piece === "flag") {
             if (pos[0] !== "0" && pos[0] !== "0") {
+                window.alert("Flag can only be placed in tiles with Blue border")
                 return false
             } else if (pos[1] !== "1" && pos[1] !== "3") {
                 window.alert("Flag can only be placed in tiles with Blue border")
@@ -170,6 +171,13 @@ class Board {
                     window.alert("Mines can not go in flag spots")
                     return false;
                 }
+            }else if(pos[0] === "0" || pos[0] === "1"){
+                return true
+            }else if(pos[0] === "14" || pos[0] === "13"){
+                return true
+            }else{
+                window.alert("mines can only be in the bottom two rows of your half")
+                return false;
             }
         }else if(piece === "bomb"){
             if(pos[0] === "5" || pos[0] === "9"){
