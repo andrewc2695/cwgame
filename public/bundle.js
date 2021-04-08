@@ -134,12 +134,21 @@ class Board {
             let pieceList = document.createElement("ul");
             pieceList.setAttribute('class', 'piece-list');
             remainingPieces.forEach(piece => {
+                if(piece !== "null"){
+                    let li = document.createElement("li");
+                    li.setAttribute('class', 'piece-value');
+                    li.innerHTML = piece;
+                    pieceList.appendChild(li);
+                    li.addEventListener("click", () => this.placePiece(e, piece));
+                }
+            });
+            if(e.target.innerHTML !== ""){
                 let li = document.createElement("li");
                 li.setAttribute('class', 'piece-value');
-                li.innerHTML = piece;
+                li.innerHTML = "Remove";
                 pieceList.appendChild(li);
-                li.addEventListener("click", () => this.placePiece(e, piece));
-            });
+                li.addEventListener("click", () => this.placePiece(e, null));
+            }
             e.currentTarget.appendChild(pieceList);
             let that = e.currentTarget.id;
             setTimeout(() => {
@@ -149,6 +158,7 @@ class Board {
     }
 
     placePiece = (e, piece) => {
+        debugger
         let pos
         let target;
         if(e.target.className === "pieceValue"){
@@ -164,9 +174,12 @@ class Board {
                    }else{
                        this.pieces[target.children[i].innerHTML]++;
                    }
-                    target.children[i].innerHTML = piece;
+                   if(piece === "Remove"){
+                       target.children[i].innerHTML = "";
+                   }else{
+                       target.children[i].innerHTML = piece;
+                   }
                 }else{
-                    debugger
                     target.children[i].innerHTML = piece;
                     break
                 }
