@@ -153,11 +153,7 @@ class Board {
         if(e.target.className === "pieceValue"){
             pos = e.target.parentNode.id.split(" ");
             target = e.target.parentNode;
-        }else{
-           pos = e.target.id.split(" ");
-           target = e.target;
         }
-        debugger
         this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
         for(let i = 0; i < target.children.length; i++){
             if(target.children[i].className === "pieceValue"){
@@ -167,7 +163,9 @@ class Board {
                    }else{
                        this.pieces[target.children[i].innerHTML]++;
                    }
+                    target.children[i].innerHTML = piece;
                 }else{
+                    debugger
                     target.children[i].innerHTML = piece;
                     break
                 }
