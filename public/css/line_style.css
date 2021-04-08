@@ -207,3 +207,60 @@ transform-origin: right;
     left: 29px;
 }
 
+#pv00, #pv01, #pv02, #pv03{
+    top: -2px;
+}
+
+#pv10, #pv11, #pv12, #pv13{
+    top: -30px;
+}
+
+#pv14{
+    top: -23px;
+}
+
+#pv21{
+    top: -26px;
+}
+
+#pv20{
+    top: -22px;
+    border-radius: 50%;
+}
+
+#pv22{
+    top: -25px;
+}
+
+#pv24{
+    top: -24px;
+}
+
+#pv31{
+    top: -14px;
+}
+
+#pv32{
+    top: -11px;
+    border-radius: 50%;
+}
+
+#pv33{
+    top: -16px;
+}
+
+#pv50{
+    top: -31px;
+}
+
+#pv51{
+    top: -19px;
+}
+
+#pv52{
+    top: -30px;
+}
+
+#pv91{
+    top: -7px;
+}
