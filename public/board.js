@@ -156,6 +156,25 @@ class Board {
         }
     }
 
+    validPlacement(pos, piece) {
+        if (piece === "flag") {
+            if (pos[0] !== "0" && pos[0] !== "0") {
+                return false
+            } else if (pos[1] !== "1" && pos[1] !== "3") {
+                window.alert("Flag can only be placed in tiles with Blue border")
+                return false
+            }
+        }else if(piece === "mine"){
+            if(pos[0] === "0" || pos[0] === "14"){
+                if(pos[1] === "1" || pos[1] ==="3"){
+                    window.alert("mines can not go in flag spots")
+                    return false;
+                }
+            }
+        }
+        return true
+    }
+
     placePiece = (e, piece) => {
         let pos
         let target;
@@ -163,29 +182,31 @@ class Board {
             pos = e.target.parentNode.id.split(" ");
             target = e.target.parentNode;
         }
-        this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
-        for(let i = 0; i < target.children.length; i++){
-            if(target.children[i].className === "pieceValue"){
-                if(target.children[i].innerHTML !== ""){
-                   if( this.pieces[target.children[i].innerHTML] === undefined){
-                       this.pieces[target.children[i].innerHTML] = 1;
-                   }else{
-                       this.pieces[target.children[i].innerHTML]++;
-                   }
-                   if(piece === "Remove"){
-                       target.children[i].innerHTML = "";
-                   }else{
-                       target.children[i].innerHTML = piece;
-                   }
-                }else{
-                    target.children[i].innerHTML = piece;
-                    break
+        if (this.validPlacement(pos, piece)){
+            this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
+            for(let i = 0; i < target.children.length; i++){
+                if(target.children[i].className === "pieceValue"){
+                    if(target.children[i].innerHTML !== ""){
+                    if( this.pieces[target.children[i].innerHTML] === undefined){
+                        this.pieces[target.children[i].innerHTML] = 1;
+                    }else{
+                        this.pieces[target.children[i].innerHTML]++;
+                    }
+                    if(piece === "Remove"){
+                        target.children[i].innerHTML = "";
+                    }else{
+                        target.children[i].innerHTML = piece;
+                    }
+                    }else{
+                        target.children[i].innerHTML = piece;
+                        break
+                    }
                 }
             }
-        }
-        this.pieces[piece]--
-        if(this.pieces[piece] === 0){
-            delete this.pieces[piece];
+            this.pieces[piece]--
+            if(this.pieces[piece] === 0){
+                delete this.pieces[piece];
+            }
         }
     }
 
