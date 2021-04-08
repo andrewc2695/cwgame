@@ -167,9 +167,14 @@ class Board {
         }else if(piece === "mine"){
             if(pos[0] === "0" || pos[0] === "14"){
                 if(pos[1] === "1" || pos[1] ==="3"){
-                    window.alert("mines can not go in flag spots")
+                    window.alert("Mines can not go in flag spots")
                     return false;
                 }
+            }
+        }else if(piece === "bomb"){
+            if(pos[0] === "5" || pos[0] === "9"){
+                window.alert("Bombs can not be placed in this row");
+                return false;
             }
         }
         return true
