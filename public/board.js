@@ -5,7 +5,6 @@
 //     circle:  
 // }
 
-const socket = io();
 
 const Tile = require("./tile")
 
@@ -15,7 +14,7 @@ const Tile = require("./tile")
 // this.candycane = info.candycane;
 
 class Board {
-    constructor(){
+    constructor(socket){
         this.board = [
             [new Tile({ row: 0, col: 0, piece: null, safe: false, candycane: false, connects: ['0, 1','1, 0']}),
                 new Tile({ row: 0, col: 1, piece: null, safe: false, candycane: false, connects: ['0, 0', '0, 2', '1, 1']}),
@@ -122,6 +121,7 @@ class Board {
             7: 1,
             8: 1
         };
+        this.posObj = {}
     }
 
     closeWindow = (that, pieceList) => {
@@ -198,6 +198,7 @@ class Board {
             target = e.target.parentNode;
         }
         if (this.validPlacement(pos, piece)){
+            this.posObj[pos.join(" ")] = piece;
             this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
             for(let i = 0; i < target.children.length; i++){
                 if(target.children[i].className === "pieceValue"){
@@ -223,7 +224,6 @@ class Board {
                 delete this.pieces[piece];
             }
         }
-        socket.broadcast.emit("place", console.log("hi"));
     }
 
     setUpBoard = (player) => {
@@ -232,6 +232,13 @@ class Board {
         for(let i = 0; i < myTiles.length; i++){
             myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
         }
+        let interval = setInterval(() => {
+            console.log(Object.keys(this.posObj).length);
+            if(Object.keys(this.posObj).length === 25){
+                let res = window.alert("Ready?");
+                debugger
+            }
+        }, 1000)
     }
 
 

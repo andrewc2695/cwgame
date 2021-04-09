@@ -20,6 +20,8 @@ io.on('connection', function(socket) {
     socket.on('move', function(msg) {
         socket.broadcast.emit('move', msg);
     });
+
+    socket.on("place", console.log("hi"))
 });
 
 app.get('/', function(req, res) {
