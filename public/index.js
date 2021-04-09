@@ -6,10 +6,10 @@ socket.on('player', msg => {
     let highlightedTiles = [];
     console.log(player)
     const gameBoard = new Board(socket);
-    gameBoard.setUpBoard(`p1`);
+    let ready = gameBoard.setUpBoard(`p1`);
+    console.log(ready);
 })
 
-socket.on("place", console.log("hi"));
 
 // const squares = document.getElementsByClassName("square");
 

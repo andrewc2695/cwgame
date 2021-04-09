@@ -233,11 +233,13 @@ class Board {
         for(let i = 0; i < myTiles.length; i++){
             myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
         }
+        let btn = document.getElementById("start");
         let interval = setInterval(() => {
             console.log(Object.keys(this.posObj).length);
-            if(Object.keys(this.posObj).length === 25){
-                let res = window.alert("Ready?");
-                debugger
+            if(Object.keys(this.posObj).length === 1){
+                btn.style.display=""
+            }else{
+                btn.style.display = "none"
             }
         }, 1000)
     }
@@ -280,7 +282,8 @@ socket.on('player', msg => {
     let highlightedTiles = [];
     console.log(player)
     const gameBoard = new Board(socket);
-    gameBoard.setUpBoard(`p1`);
+    let ready = gameBoard.setUpBoard(`p1`);
+    console.log(ready);
 })
 
 socket.on("place", console.log("hi"));
