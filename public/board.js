@@ -5,6 +5,8 @@
 //     circle:  
 // }
 
+const socket = io();
+
 const Tile = require("./tile")
 
 // this.pos = info.pos;
@@ -221,6 +223,7 @@ class Board {
                 delete this.pieces[piece];
             }
         }
+        socket.broadcast.emit("place", console.log("hi"));
     }
 
     setUpBoard = (player) => {

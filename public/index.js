@@ -9,6 +9,8 @@ socket.on('player', msg => {
     gameBoard.setUpBoard(`p1`);
 })
 
+socket.on("place", console.log("hi"));
+
 // const squares = document.getElementsByClassName("square");
 
 // const circles = document.getElementsByClassName("circle")
