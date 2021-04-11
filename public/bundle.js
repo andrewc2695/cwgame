@@ -122,7 +122,8 @@ class Board {
             7: 1,
             8: 1
         };
-        this.posObj = {}
+        this.posObj = {};
+        this.ready = false;
     }
 
     closeWindow = (that, pieceList) => {
@@ -225,6 +226,16 @@ class Board {
                 delete this.pieces[piece];
             }
         }
+        if(Object.keys(this.posObj).length === 1){
+            let start = document.getElementById("start")
+            start.style.display = "block";
+            start.addEventListener("click", () => {
+                this.ready = true;
+                console.log(this.ready);
+            }, {once: true});
+        }else{
+            document.getElementById("start").style.display="none"
+        }
     }
 
     setUpBoard = (player) => {
@@ -234,14 +245,14 @@ class Board {
             myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
         }
         let btn = document.getElementById("start");
-        let interval = setInterval(() => {
-            console.log(Object.keys(this.posObj).length);
-            if(Object.keys(this.posObj).length === 1){
-                btn.style.display=""
-            }else{
-                btn.style.display = "none"
-            }
-        }, 1000)
+        // let interval = setInterval(() => {
+        //     console.log(Object.keys(this.posObj).length);
+        //     if(Object.keys(this.posObj).length === 1){
+        //         btn.style.display=""
+        //     }else{
+        //         btn.style.display = "none"
+        //     }
+        // }, 1000)
     }
 
 
@@ -277,16 +288,22 @@ module.exports = Board;
 const Board = require('./board.js');
 let socket = io();
 let player;
+const gameBoard = new Board();
 socket.on('player', msg => {
     player = msg
     let highlightedTiles = [];
     console.log(player)
-    const gameBoard = new Board(socket);
-    let ready = gameBoard.setUpBoard(`p1`);
-    console.log(ready);
+    gameBoard.setUpBoard(`p1`);
 })
 
-socket.on("place", console.log("hi"));
+let ready = gameBoard.ready;
+setInterval(() => {
+    if(gameBoard.ready){
+        socket.broadcast.emit("setup", () => console.log("setup"));
+    }
+}, 300)
+
+
 
 // const squares = document.getElementsByClassName("square");
 

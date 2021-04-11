@@ -21,6 +21,10 @@ io.on('connection', function(socket) {
         socket.broadcast.emit('move', msg);
     });
 
+    socket.on('setup', (msg) => {
+        console.log("setup");
+    })
+
 });
 
 app.get('/', function(req, res) {

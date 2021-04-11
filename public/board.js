@@ -121,7 +121,8 @@ class Board {
             7: 1,
             8: 1
         };
-        this.posObj = {}
+        this.posObj = {};
+        this.ready = false;
     }
 
     closeWindow = (that, pieceList) => {
@@ -224,6 +225,16 @@ class Board {
                 delete this.pieces[piece];
             }
         }
+        if(Object.keys(this.posObj).length === 1){
+            let start = document.getElementById("start")
+            start.style.display = "block";
+            start.addEventListener("click", () => {
+                this.ready = true;
+                console.log(this.ready);
+            }, {once: true});
+        }else{
+            document.getElementById("start").style.display="none"
+        }
     }
 
     setUpBoard = (player) => {
@@ -233,14 +244,14 @@ class Board {
             myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
         }
         let btn = document.getElementById("start");
-        let interval = setInterval(() => {
-            console.log(Object.keys(this.posObj).length);
-            if(Object.keys(this.posObj).length === 1){
-                btn.style.display=""
-            }else{
-                btn.style.display = "none"
-            }
-        }, 1000)
+        // let interval = setInterval(() => {
+        //     console.log(Object.keys(this.posObj).length);
+        //     if(Object.keys(this.posObj).length === 1){
+        //         btn.style.display=""
+        //     }else{
+        //         btn.style.display = "none"
+        //     }
+        // }, 1000)
     }
 
 

@@ -1,14 +1,21 @@
 const Board = require('./board.js');
 let socket = io();
 let player;
+const gameBoard = new Board();
 socket.on('player', msg => {
     player = msg
     let highlightedTiles = [];
     console.log(player)
-    const gameBoard = new Board(socket);
-    let ready = gameBoard.setUpBoard(`p1`);
-    console.log(ready);
+    gameBoard.setUpBoard(`p1`);
 })
+
+let ready = gameBoard.ready;
+setInterval(() => {
+    if(gameBoard.ready){
+        socket.broadcast.emit("setup", () => console.log("setup"));
+    }
+}, 300)
+
 
 
 // const squares = document.getElementsByClassName("square");
