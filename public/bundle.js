@@ -285,7 +285,11 @@ class Board {
     placeOpponentsPieces(pos){
         let opPos = Object.keys(pos);
         let opPieces = Object.values(pos);
-        debugger;
+        for(let i = 0; i < opPos.length; i++){
+            let opTile =opPos[i].split(" ");
+            this.board[parseInt(opTile[0])][parseInt(opTile[1])].piece = opPieces[i];
+        }
+        console.log(this.board);
     }
 }
 
