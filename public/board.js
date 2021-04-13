@@ -225,7 +225,7 @@ class Board {
                 delete this.pieces[piece];
             }
         }
-        if(Object.keys(this.posObj).length === 1){
+        if(Object.keys(this.posObj).length === 25){
             let start = document.getElementById("start")
             start.style.display = "block";
             start.addEventListener("click", () => {
@@ -279,6 +279,12 @@ class Board {
             }
         }
         return moves;
+    }
+
+    placeOpponentsPieces(pos){
+        let opPos = Object.keys(pos);
+        let opPieces = Object.values(pos);
+        debugger;
     }
 }
 

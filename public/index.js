@@ -1,5 +1,5 @@
 const Board = require('./board.js');
-let socket = io.connect("http://localhost:3000");
+let socket = io();
 let player;
 const gameBoard = new Board();
 console.log("can u see this?")
@@ -15,15 +15,15 @@ let int = setInterval(() => {
     console.log(gameBoard.ready)
     if(gameBoard.ready){
         console.log("hi");
-        socket.emit("setup", {
-            msg: "i am a message"
-        });
+        socket.emit("setup", 
+            gameBoard.posObj
+        );
         clearInterval(int);
     }
 }, 300)
 
 socket.on("setup", (msg) => {
-    console.log(msg);
+    gameBoard.placeOpponentsPieces(msg);
 })
 
 

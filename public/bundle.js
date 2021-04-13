@@ -226,7 +226,7 @@ class Board {
                 delete this.pieces[piece];
             }
         }
-        if(Object.keys(this.posObj).length === 1){
+        if(Object.keys(this.posObj).length === 25){
             let start = document.getElementById("start")
             start.style.display = "block";
             start.addEventListener("click", () => {
@@ -281,12 +281,18 @@ class Board {
         }
         return moves;
     }
+
+    placeOpponentsPieces(pos){
+        let opPos = Object.keys(pos);
+        let opPieces = Object.values(pos);
+        debugger;
+    }
 }
 
 module.exports = Board;
 },{"./tile":3}],2:[function(require,module,exports){
 const Board = require('./board.js');
-let socket = io.connect("http://localhost:3000");
+let socket = io();
 let player;
 const gameBoard = new Board();
 console.log("can u see this?")
@@ -302,15 +308,15 @@ let int = setInterval(() => {
     console.log(gameBoard.ready)
     if(gameBoard.ready){
         console.log("hi");
-        socket.emit("setup", {
-            msg: "i am a message"
-        });
+        socket.emit("setup", 
+            gameBoard.posObj
+        );
         clearInterval(int);
     }
 }, 300)
 
 socket.on("setup", (msg) => {
-    console.log(msg);
+    gameBoard.placeOpponentsPieces(msg);
 })
 
 
