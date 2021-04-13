@@ -1,7 +1,8 @@
 const Board = require('./board.js');
-let socket = io();
+let socket = io.connect("http://localhost:3000");
 let player;
 const gameBoard = new Board();
+console.log("can u see this?")
 socket.on('player', msg => {
     player = msg
     let highlightedTiles = [];
@@ -10,12 +11,20 @@ socket.on('player', msg => {
 })
 
 let ready = gameBoard.ready;
-setInterval(() => {
+let int = setInterval(() => {
+    console.log(gameBoard.ready)
     if(gameBoard.ready){
-        socket.broadcast.emit("setup", () => console.log("setup"));
+        console.log("hi");
+        socket.emit("setup", {
+            msg: "i am a message"
+        });
+        clearInterval(int);
     }
 }, 300)
 
+socket.on("setup", (msg) => {
+    console.log(msg);
+})
 
 
 // const squares = document.getElementsByClassName("square");

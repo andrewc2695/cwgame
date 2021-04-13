@@ -22,7 +22,7 @@ io.on('connection', function(socket) {
     });
 
     socket.on('setup', (msg) => {
-        console.log("setup");
+        io.sockets.emit('setup', msg)
     })
 
 });
