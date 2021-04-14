@@ -230,7 +230,7 @@ class Board {
                 delete this.pieces[piece];
             }
         }
-        if(Object.keys(this.posObj).length === 25){
+        if(Object.keys(this.posObj).length === 1){
             let start = document.getElementById("start")
             start.style.display = "block";
             start.addEventListener("click", () => {
@@ -290,11 +290,20 @@ class Board {
     placeOpponentsPieces(pos){
         let opPos = Object.keys(pos);
         let opPieces = Object.values(pos);
-        for(let i = 0; i < opPos.length; i++){
-            let opTile =opPos[i].split(" ");
-            this.board[parseInt(opTile[0])][parseInt(opTile[1])].piece = opPieces[i];
+        for(let z = 0; z < opPos.length; z++){
+            let opTile =opPos[z].split(" ");
+            this.board[parseInt(opTile[0])][parseInt(opTile[1])].piece = opPieces[z];
         }
-        console.log(this.board);
+        let opPlayer = (this.player === "green" ? "p2" : "p1");
+        let opColor = (this.player === "green" ? "yellow" : "green");
+        let opTiles = document.getElementsByClassName(opPlayer);
+        for(let i = 0; i < opTiles.length; i++){
+            for(let j = 0; j < opTiles[i].children.length; j++){
+                if(opTiles[i].children[j].className === "pieceValue"){
+                    opTiles[i].children[j].style.backgroundColor = opColor;
+                }
+            }
+        }
     }
 }
 
