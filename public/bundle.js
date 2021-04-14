@@ -124,6 +124,7 @@ class Board {
         };
         this.posObj = {};
         this.ready = false;
+        this.player;
     }
 
     closeWindow = (that, pieceList) => {
@@ -212,11 +213,14 @@ class Board {
                     }
                     if(piece === "Remove"){
                         target.children[i].innerHTML = "";
+                        target.children[i].style.backgroundColor = "white";
                     }else{
                         target.children[i].innerHTML = piece;
+                        debugger
                     }
                     }else{
                         target.children[i].innerHTML = piece;
+                        target.children[i].style.backgroundColor = this.player;
                         break
                     }
                 }
@@ -240,7 +244,8 @@ class Board {
 
     setUpBoard = (player) => {
         let myTiles = document.getElementsByClassName(player);
-
+        this.player = (player === "p1" ? "green" : "yellow");
+        console.log(this.player);
         for(let i = 0; i < myTiles.length; i++){
             myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
         }
@@ -302,9 +307,8 @@ const gameBoard = new Board();
 console.log("can u see this?")
 socket.on('player', msg => {
     player = msg
-    let highlightedTiles = [];
     console.log(player)
-    gameBoard.setUpBoard(`p1`);
+    gameBoard.setUpBoard(`p${msg}`);
 })
 
 let ready = gameBoard.ready;

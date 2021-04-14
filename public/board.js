@@ -123,6 +123,7 @@ class Board {
         };
         this.posObj = {};
         this.ready = false;
+        this.player;
     }
 
     closeWindow = (that, pieceList) => {
@@ -211,11 +212,14 @@ class Board {
                     }
                     if(piece === "Remove"){
                         target.children[i].innerHTML = "";
+                        target.children[i].style.backgroundColor = "white";
                     }else{
                         target.children[i].innerHTML = piece;
+                        debugger
                     }
                     }else{
                         target.children[i].innerHTML = piece;
+                        target.children[i].style.backgroundColor = this.player;
                         break
                     }
                 }
@@ -239,7 +243,8 @@ class Board {
 
     setUpBoard = (player) => {
         let myTiles = document.getElementsByClassName(player);
-
+        this.player = (player === "p1" ? "green" : "yellow");
+        console.log(this.player);
         for(let i = 0; i < myTiles.length; i++){
             myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
         }
@@ -288,7 +293,9 @@ class Board {
             let opTile =opPos[i].split(" ");
             this.board[parseInt(opTile[0])][parseInt(opTile[1])].piece = opPieces[i];
         }
-        console.log(this.board);
+        let opPlayer = (this.player === "green" ? "p2" : "p1");
+        let opTiles = document.getElementsByClassName(opPlayer);
+        for(i = 0; i < )
     }
 }
 

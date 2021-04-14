@@ -5,9 +5,8 @@ const gameBoard = new Board();
 console.log("can u see this?")
 socket.on('player', msg => {
     player = msg
-    let highlightedTiles = [];
     console.log(player)
-    gameBoard.setUpBoard(`p1`);
+    gameBoard.setUpBoard(`p${msg}`);
 })
 
 let ready = gameBoard.ready;
