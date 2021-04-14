@@ -1,17 +1,5 @@
-// const tile = {
-//     pos: undefined,
-//     piece: "none",
-//     candyCane:,
-//     circle:  
-// }
-
 
 const Tile = require("./tile")
-
-// this.pos = info.pos;
-// this.piece = null;
-// this.safe = info.safe;
-// this.candycane = info.candycane;
 
 class Board {
     constructor(socket){
@@ -229,13 +217,14 @@ class Board {
                 delete this.pieces[piece];
             }
         }
-        if(Object.keys(this.posObj).length === 1){
+        if(Object.keys(this.posObj).length === 25){
             let start = document.getElementById("start")
             start.style.display = "block";
             start.addEventListener("click", () => {
                 this.ready = true;
                 console.log(this.ready);
             }, {once: true});
+            start.style.display = "none";
         }else{
             document.getElementById("start").style.display="none"
         }
@@ -249,14 +238,6 @@ class Board {
             myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
         }
         let btn = document.getElementById("start");
-        // let interval = setInterval(() => {
-        //     console.log(Object.keys(this.posObj).length);
-        //     if(Object.keys(this.posObj).length === 1){
-        //         btn.style.display=""
-        //     }else{
-        //         btn.style.display = "none"
-        //     }
-        // }, 1000)
     }
 
 
