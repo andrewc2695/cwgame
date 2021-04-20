@@ -11,9 +11,7 @@ socket.on('player', msg => {
 
 let ready = gameBoard.ready;
 let int = setInterval(() => {
-    console.log(gameBoard.ready)
     if(gameBoard.ready){
-        console.log("hi");
         socket.emit("setup", 
             gameBoard.posObj
         );

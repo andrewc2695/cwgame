@@ -1,23 +1,11 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-// const tile = {
-//     pos: undefined,
-//     piece: "none",
-//     candyCane:,
-//     circle:  
-// }
-
 
 const Tile = require("./tile")
-
-// this.pos = info.pos;
-// this.piece = null;
-// this.safe = info.safe;
-// this.candycane = info.candycane;
 
 class Board {
     constructor(socket){
         this.board = [
-            [new Tile({ row: 0, col: 0, piece: null, safe: false, candycane: false, connects: ['0, 1','1, 0']}),
+            [new Tile({ row: 0, col: 0, piece: null, safe: false, candycane: false, player: undefined, connects: ['0, 1','1, 0']}),
                 new Tile({ row: 0, col: 1, piece: null, safe: false, candycane: false, connects: ['0, 0', '0, 2', '1, 1']}),
                 new Tile({ row: 0, col: 2, piece: null, safe: false, candycane: false, connects: ['0, 1', '0, 3', '1, 2']}),
                 new Tile({ row: 0, col: 3, piece: null, safe: false, candycane: false, connects: ['0, 2', '0, 4', '1, 3']}),
@@ -203,6 +191,7 @@ class Board {
         if (this.validPlacement(pos, piece)){
             this.posObj[pos.join(" ")] = piece;
             this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
+            this.board[parseInt(pos[0])][parseInt(pos[1])].player = this.player;
             for(let i = 0; i < target.children.length; i++){
                 if(target.children[i].className === "pieceValue"){
                     if(target.children[i].innerHTML !== ""){
@@ -231,11 +220,18 @@ class Board {
             }
         }
         if(Object.keys(this.posObj).length === 1){
+            console.log("hi");
             let start = document.getElementById("start")
             start.style.display = "block";
             start.addEventListener("click", () => {
                 this.ready = true;
                 console.log(this.ready);
+                let myTiles = document.getElementsByClassName(this.player);
+                for (let i = 0; i < myTiles.length; i++) {
+                    debugger
+                    myTiles[i].removeEventListener("click", this.selectPiece)
+                }
+                start.style.display = "none";
             }, {once: true});
         }else{
             document.getElementById("start").style.display="none"
@@ -247,17 +243,9 @@ class Board {
         this.player = (player === "p1" ? "green" : "yellow");
         console.log(this.player);
         for(let i = 0; i < myTiles.length; i++){
-            myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
+            myTiles[i].addEventListener("click", this.selectPiece)
         }
         let btn = document.getElementById("start");
-        // let interval = setInterval(() => {
-        //     console.log(Object.keys(this.posObj).length);
-        //     if(Object.keys(this.posObj).length === 1){
-        //         btn.style.display=""
-        //     }else{
-        //         btn.style.display = "none"
-        //     }
-        // }, 1000)
     }
 
 
@@ -305,6 +293,8 @@ class Board {
             }
         }
     }
+
+    
 }
 
 module.exports = Board;
@@ -322,9 +312,7 @@ socket.on('player', msg => {
 
 let ready = gameBoard.ready;
 let int = setInterval(() => {
-    console.log(gameBoard.ready)
     if(gameBoard.ready){
-        console.log("hi");
         socket.emit("setup", 
             gameBoard.posObj
         );
@@ -370,6 +358,7 @@ class Tile {
         this.safe = info.safe;
         this.candycane = info.candycane;
         this.connects = info.connects;
+        this.playe = info.player;
     }
 }
 

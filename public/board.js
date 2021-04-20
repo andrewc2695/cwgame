@@ -4,7 +4,7 @@ const Tile = require("./tile")
 class Board {
     constructor(socket){
         this.board = [
-            [new Tile({ row: 0, col: 0, piece: null, safe: false, candycane: false, connects: ['0, 1','1, 0']}),
+            [new Tile({ row: 0, col: 0, piece: null, safe: false, candycane: false, player: undefined, connects: ['0, 1','1, 0']}),
                 new Tile({ row: 0, col: 1, piece: null, safe: false, candycane: false, connects: ['0, 0', '0, 2', '1, 1']}),
                 new Tile({ row: 0, col: 2, piece: null, safe: false, candycane: false, connects: ['0, 1', '0, 3', '1, 2']}),
                 new Tile({ row: 0, col: 3, piece: null, safe: false, candycane: false, connects: ['0, 2', '0, 4', '1, 3']}),
@@ -190,6 +190,7 @@ class Board {
         if (this.validPlacement(pos, piece)){
             this.posObj[pos.join(" ")] = piece;
             this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
+            this.board[parseInt(pos[0])][parseInt(pos[1])].player = this.player;
             for(let i = 0; i < target.children.length; i++){
                 if(target.children[i].className === "pieceValue"){
                     if(target.children[i].innerHTML !== ""){
@@ -217,14 +218,19 @@ class Board {
                 delete this.pieces[piece];
             }
         }
-        if(Object.keys(this.posObj).length === 25){
+        if(Object.keys(this.posObj).length === 1){
+            console.log("hi");
             let start = document.getElementById("start")
             start.style.display = "block";
             start.addEventListener("click", () => {
                 this.ready = true;
                 console.log(this.ready);
+                let myTiles = document.getElementsByClassName(this.player);
+                for (let i = 0; i < myTiles.length; i++) {
+                    myTiles[i].removeEventListener("click", this.selectPiece)
+                }
+                start.style.display = "none";
             }, {once: true});
-            start.style.display = "none";
         }else{
             document.getElementById("start").style.display="none"
         }
@@ -235,7 +241,7 @@ class Board {
         this.player = (player === "p1" ? "green" : "yellow");
         console.log(this.player);
         for(let i = 0; i < myTiles.length; i++){
-            myTiles[i].addEventListener("click", (e) => this.selectPiece(e))
+            myTiles[i].addEventListener("click", this.selectPiece)
         }
         let btn = document.getElementById("start");
     }
@@ -285,6 +291,8 @@ class Board {
             }
         }
     }
+
+    
 }
 
 module.exports = Board;
