@@ -230,6 +230,7 @@ class Board {
                 let myTiles = document.getElementsByClassName(player);
                 for (let i = 0; i < myTiles.length; i++) {
                     myTiles[i].removeEventListener("click", this.selectPiece)
+                    myTiles[i].addEventListener("click", this.getValidMoves)
                 }
                 start.style.display = "none";
             }, {once: true});
@@ -249,7 +250,11 @@ class Board {
     }
 
 
-    getValidMoves = (start) => {
+    getValidMoves = (e) => {
+        debugger;
+        let start = e.currentTarget.id.split(" ")
+        start[0] = parseInt(start[0]);
+        start[1] = parseInt(start[1]);
         let startTile = this.board[start[0]][start[1]];
         let moves = [];
         moves = moves.concat(startTile.connects);
@@ -293,7 +298,6 @@ class Board {
             }
         }
     }
-
     
 }
 
