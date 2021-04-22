@@ -114,6 +114,7 @@ class Board {
         this.ready = false;
         this.player;
         this.highlightedTiles = [];
+        this.startTile;
     }
 
     closeWindow = (that, pieceList) => {
@@ -252,11 +253,11 @@ class Board {
 
 
     getValidMoves = (e) => {
-        debugger;
         let start = e.currentTarget.id.split(" ")
         start[0] = parseInt(start[0]);
         start[1] = parseInt(start[1]);
         let startTile = this.board[start[0]][start[1]];
+        this.start = startTile;
         let moves = [];
         moves = moves.concat(startTile.connects);
         if(startTile.candycane === true){
@@ -279,13 +280,31 @@ class Board {
             }
         }
         moves.forEach(move => {
-            debugger
-            this.highlightedTiles.push(move)
             move = move.split(",").join("");
-            console.log(move);
+            this.highlightedTiles.push(move)
             let validMove = document.getElementById(String(move));
+            validMove.addEventListener("click", this.movePiece.bind(this));
             validMove.style.boxShadow = "0px 0px 10px 5px yellow";
         });
+    }
+
+    movePiece(e){
+        let end = e.currentTarget.id.split(" ")
+        let target = e.currentTarget;
+        end[0] = parseInt(end[0]);
+        end[1] = parseInt(end[1]);
+        let endTile = this.board[end[0]][end[1]];
+        endTile.piece = this.start.piece;
+        endTile.player = this.start.player;
+        debugger
+        this.start.piece = null;
+        this.start.player = null
+        debugger
+        for (let i = 0; i < target.children.length; i++) {
+            if (target.children[i].className === "pieceValue") {
+                target.children[i].innerHTML = endTile.piece;
+            }
+        }
     }
 
     placeOpponentsPieces(pos){
@@ -370,7 +389,7 @@ class Tile {
         this.safe = info.safe;
         this.candycane = info.candycane;
         this.connects = info.connects;
-        this.playe = info.player;
+        this.player = info.player;
     }
 }
 
