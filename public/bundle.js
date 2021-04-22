@@ -113,6 +113,7 @@ class Board {
         this.posObj = {};
         this.ready = false;
         this.player;
+        this.highlightedTiles = [];
     }
 
     closeWindow = (that, pieceList) => {
@@ -277,7 +278,14 @@ class Board {
                 i++;
             }
         }
-        return moves;
+        moves.forEach(move => {
+            debugger
+            this.highlightedTiles.push(move)
+            move = move.split(",").join("");
+            console.log(move);
+            let validMove = document.getElementById(String(move));
+            validMove.style.boxShadow = "0px 0px 10px 5px yellow";
+        });
     }
 
     placeOpponentsPieces(pos){
