@@ -300,6 +300,7 @@ class Board {
         for (let i = 0; i < startTile.children.length; i++) {
             if (startTile.children[i].className === "pieceValue") {
                 startTile.children[i].innerHTML = "";
+                startTile.children[i].style.backgroundColor = "white"
             }
         }
         let endTile = this.board[end[0]][end[1]];
@@ -310,8 +311,12 @@ class Board {
         for (let i = 0; i < target.children.length; i++) {
             if (target.children[i].className === "pieceValue") {
                 target.children[i].innerHTML = endTile.piece;
+                target.children[i].style.backgroundColor = this.player;
             }
         }
+        this.highlightedTiles.forEach(tile => {
+            
+        })
     }
 
     placeOpponentsPieces(pos){
