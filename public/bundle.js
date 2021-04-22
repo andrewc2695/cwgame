@@ -193,21 +193,21 @@ class Board {
         if (this.validPlacement(pos, piece)){
             this.posObj[pos.join(" ")] = piece;
             this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
+            debugger;
             this.board[parseInt(pos[0])][parseInt(pos[1])].player = this.player;
             for(let i = 0; i < target.children.length; i++){
                 if(target.children[i].className === "pieceValue"){
                     if(target.children[i].innerHTML !== ""){
-                    if( this.pieces[target.children[i].innerHTML] === undefined){
-                        this.pieces[target.children[i].innerHTML] = 1;
-                    }else{
-                        this.pieces[target.children[i].innerHTML]++;
-                    }
+                        if( this.pieces[target.children[i].innerHTML] === undefined){
+                            this.pieces[target.children[i].innerHTML] = 1;
+                        }else{
+                            this.pieces[target.children[i].innerHTML]++;
+                        }
                     if(piece === "Remove"){
                         target.children[i].innerHTML = "";
                         target.children[i].style.backgroundColor = "white";
                     }else{
                         target.children[i].innerHTML = piece;
-                        debugger
                     }
                     }else{
                         target.children[i].innerHTML = piece;
@@ -221,6 +221,7 @@ class Board {
                 delete this.pieces[piece];
             }
         }
+
         if(Object.keys(this.posObj).length === 1){
             console.log("hi");
             let start = document.getElementById("start")
@@ -289,6 +290,7 @@ class Board {
     }
 
     movePiece(e){
+        debugger
         let end = e.currentTarget.id.split(" ")
         let target = e.currentTarget;
         end[0] = parseInt(end[0]);
