@@ -115,6 +115,7 @@ class Board {
         this.player;
         this.highlightedTiles = [];
         this.startTile;
+        this.movePiece = this.movePiece.bind(this);
     }
 
     closeWindow = (that, pieceList) => {
@@ -193,7 +194,6 @@ class Board {
         if (this.validPlacement(pos, piece)){
             this.posObj[pos.join(" ")] = piece;
             this.board[parseInt(pos[0])][parseInt(pos[1])].piece = piece;
-            debugger;
             this.board[parseInt(pos[0])][parseInt(pos[1])].player = this.player;
             for(let i = 0; i < target.children.length; i++){
                 if(target.children[i].className === "pieceValue"){
@@ -259,7 +259,6 @@ class Board {
         start[1] = parseInt(start[1]);
         let startTile = this.board[start[0]][start[1]];
         this.start = startTile;
-        debugger
         let moves = [];
         moves = moves.concat(startTile.connects);
         if(startTile.candycane === true){
@@ -285,12 +284,13 @@ class Board {
             move = move.split(",").join("");
             this.highlightedTiles.push(move)
             let validMove = document.getElementById(String(move));
-            validMove.addEventListener("click", this.movePiece.bind(this));
+            validMove.addEventListener("click", this.movePiece, true);
             validMove.style.boxShadow = "0px 0px 10px 5px yellow";
         });
     }
 
     movePiece(e){
+        // debugger
         let end = e.currentTarget.id.split(" ")
         let target = e.currentTarget;
         end[0] = parseInt(end[0]);
@@ -318,6 +318,7 @@ class Board {
         while(this.highlightedTiles.length){
             let validMove = document.getElementById(String(this.highlightedTiles[0]));
             validMove.style.boxShadow = "";
+            validMove.removeEventListener("click", this.movePiece, true);
             this.highlightedTiles.shift();
         }
     }
