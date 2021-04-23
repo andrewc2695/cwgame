@@ -314,9 +314,11 @@ class Board {
                 target.children[i].style.backgroundColor = this.player;
             }
         }
-        this.highlightedTiles.forEach(tile => {
-            
-        })
+        while(this.highlightedTiles.length){
+            let validMove = document.getElementById(String(this.highlightedTiles[0]));
+            validMove.style.boxShadow = "";
+            this.highlightedTiles.shift();
+        }
     }
 
     placeOpponentsPieces(pos){
