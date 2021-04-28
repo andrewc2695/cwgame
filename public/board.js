@@ -222,8 +222,7 @@ class Board {
         }
 
         if(Object.keys(this.posObj).length === 1){
-            console.log("hi");
-            let start = document.getElementById("start")
+            let start = document.getElementById("start");
             start.style.display = "block";
             start.addEventListener("click", () => {
                 this.ready = true;
@@ -232,7 +231,7 @@ class Board {
                 let myTiles = document.getElementsByClassName(player);
                 for (let i = 0; i < myTiles.length; i++) {
                     myTiles[i].removeEventListener("click", this.selectPiece)
-                    myTiles[i].addEventListener("click", this.getValidMoves)
+                    // myTiles[i].addEventListener("click", this.getValidMoves) add this when its your turn
                 }
                 start.style.display = "none";
             }, {once: true});

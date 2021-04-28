@@ -2,7 +2,9 @@ const Board = require('./board.js');
 let socket = io();
 let player;
 const gameBoard = new Board();
-console.log("can u see this?")
+document.addEventListener("click", (e) => {
+    console.log("hi")
+})
 socket.on('player', msg => {
     player = msg
     console.log(player)
