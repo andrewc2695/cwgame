@@ -25,8 +25,9 @@ socket.on("setup", (msg) => {
     gameBoard.placeOpponentsPieces(msg);
 })
 
-socket.on("bothReady", () => {
-    gameBoard.turnSetUp("green");
+socket.on("bothReady", (msg) => {
+    let color = (msg === "green" ? "yellow" : "green")
+    gameBoard.turnSetUp(color);
 })
 
 

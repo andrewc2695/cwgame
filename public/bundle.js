@@ -320,7 +320,7 @@ class Board {
             validMove.removeEventListener("click", this.movePiece, true);
             this.highlightedTiles.shift();
         }
-        this.socket.emit("moved", "moved")
+        this.socket.emit("moved", "green")
     }
 
     placeOpponentsPieces(pos){
@@ -376,7 +376,6 @@ class Board {
                 target.children[i].innerHTML = piece;
             }
         }
-
     }
 
     turnSetUp(player){
@@ -420,8 +419,9 @@ socket.on("setup", (msg) => {
     gameBoard.placeOpponentsPieces(msg);
 })
 
-socket.on("bothReady", () => {
-    gameBoard.turnSetUp("green");
+socket.on("bothReady", (msg) => {
+    let color = (msg === "green" ? "yellow" : "green")
+    gameBoard.turnSetUp(color);
 })
 
 

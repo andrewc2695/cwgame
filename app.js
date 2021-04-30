@@ -23,14 +23,14 @@ io.on('connection', function(socket) {
     });
 
     socket.on('moved', (msg) => {
-        console.log(msg)
+        
     })
 
     socket.on('setup', (msg) => {
         socket.broadcast.emit('setup', msg)
         playersReady++;
         if(playersReady === 2){
-            io.emit("bothReady")
+            io.emit("bothReady", "yellow")
         }
     })
 
