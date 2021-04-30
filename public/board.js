@@ -1,8 +1,8 @@
-
 const Tile = require("./tile")
 
 class Board {
     constructor(socket){
+        this.socket = socket;
         this.board = [
             [new Tile({ row: 0, col: 0, piece: null, safe: false, candycane: false, player: undefined, connects: ['0, 1','1, 0']}),
                 new Tile({ row: 0, col: 1, piece: null, safe: false, candycane: false, connects: ['0, 0', '0, 2', '1, 1']}),
@@ -336,6 +336,17 @@ class Board {
                 if(opTiles[i].children[j].className === "pieceValue"){
                     opTiles[i].children[j].style.backgroundColor = opColor;
                 }
+            }
+        }
+        //add event listeners to opponents piece so that you can mark them;
+    }
+
+    turnSetUp(player){
+        if(player === this.player){
+            let pNumber = (this.player === "green" ? "p1" : "p2")
+            let myTiles = document.getElementsByClassName(pNumber);
+            for (let i = 0; i < myTiles.length; i++) {
+                myTiles[i].addEventListener("click", this.getValidMoves) //add this when its your turn
             }
         }
     }

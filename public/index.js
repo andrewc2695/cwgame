@@ -1,7 +1,7 @@
 const Board = require('./board.js');
 let socket = io();
 let player;
-const gameBoard = new Board();
+const gameBoard = new Board(socket);
 document.addEventListener("click", (e) => {
     console.log("hi")
 })
@@ -9,10 +9,6 @@ socket.on('player', msg => {
     player = msg
     console.log(player)
     gameBoard.setUpBoard(`p${msg}`);
-})
-
-socket.on("bothReady", () => {
-    console.log("both ready")
 })
 
 let ready = gameBoard.ready;
@@ -27,6 +23,10 @@ let int = setInterval(() => {
 
 socket.on("setup", (msg) => {
     gameBoard.placeOpponentsPieces(msg);
+})
+
+socket.on("bothReady", () => {
+    gameBoard.turnSetUp("green");
 })
 
 

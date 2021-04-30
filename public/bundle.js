@@ -1,9 +1,9 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-
 const Tile = require("./tile")
 
 class Board {
     constructor(socket){
+        this.socket = socket;
         this.board = [
             [new Tile({ row: 0, col: 0, piece: null, safe: false, candycane: false, player: undefined, connects: ['0, 1','1, 0']}),
                 new Tile({ row: 0, col: 1, piece: null, safe: false, candycane: false, connects: ['0, 0', '0, 2', '1, 1']}),
@@ -339,6 +339,17 @@ class Board {
                 }
             }
         }
+        //add event listeners to opponents piece so that you can mark them;
+    }
+
+    turnSetUp(player){
+        if(player === this.player){
+            let pNumber = (this.player === "green" ? "p1" : "p2")
+            let myTiles = document.getElementsByClassName(pNumber);
+            for (let i = 0; i < myTiles.length; i++) {
+                myTiles[i].addEventListener("click", this.getValidMoves) //add this when its your turn
+            }
+        }
     }
     
 }
@@ -348,7 +359,7 @@ module.exports = Board;
 const Board = require('./board.js');
 let socket = io();
 let player;
-const gameBoard = new Board();
+const gameBoard = new Board(socket);
 document.addEventListener("click", (e) => {
     console.log("hi")
 })
@@ -356,10 +367,6 @@ socket.on('player', msg => {
     player = msg
     console.log(player)
     gameBoard.setUpBoard(`p${msg}`);
-})
-
-socket.on("bothReady", () => {
-    console.log("both ready")
 })
 
 let ready = gameBoard.ready;
@@ -374,6 +381,10 @@ let int = setInterval(() => {
 
 socket.on("setup", (msg) => {
     gameBoard.placeOpponentsPieces(msg);
+})
+
+socket.on("bothReady", () => {
+    gameBoard.turnSetUp("green");
 })
 
 
