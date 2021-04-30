@@ -7,6 +7,7 @@ let port = process.env.PORT || 3000;
 let io = require('socket.io')(http);
 
 const players = [];
+let playersReady = 0;
 
 io.on('connection', function(socket) {
     console.log('new connection');
@@ -23,8 +24,15 @@ io.on('connection', function(socket) {
 
     socket.on('setup', (msg) => {
         socket.broadcast.emit('setup', msg)
+        playersReady++;
+        if(playersReady === 2){
+            socket.emit("bothReady")
+        }
     })
 
+    socket.on("switchTurns", (msg) => {
+        socket.broadcast.emit('switchTurns', msg)
+    })
 });
 
 app.get('/', function(req, res) {
