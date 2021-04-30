@@ -26,7 +26,7 @@ io.on('connection', function(socket) {
         socket.broadcast.emit('setup', msg)
         playersReady++;
         if(playersReady === 2){
-            socket.emit("bothReady")
+            io.emit("bothReady")
         }
     })
 
