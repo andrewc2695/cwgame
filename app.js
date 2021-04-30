@@ -22,10 +22,6 @@ io.on('connection', function(socket) {
         socket.broadcast.emit('move', msg);
     });
 
-    socket.on('moved', (msg) => {
-        
-    })
-
     socket.on('setup', (msg) => {
         socket.broadcast.emit('setup', msg)
         playersReady++;

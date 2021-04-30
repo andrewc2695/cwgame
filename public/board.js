@@ -319,7 +319,7 @@ class Board {
             validMove.removeEventListener("click", this.movePiece, true);
             this.highlightedTiles.shift();
         }
-        this.socket.emit("moved", "green")
+        this.socket.emit("move", {start: start, end: end , color: this.player})
     }
 
     placeOpponentsPieces(pos){
