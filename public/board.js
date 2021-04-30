@@ -334,12 +334,48 @@ class Board {
         let opTiles = document.getElementsByClassName(opPlayer);
         for(let i = 0; i < opTiles.length; i++){
             for(let j = 0; j < opTiles[i].children.length; j++){
+                opTiles[i].addEventListener("click", this.markOpponetsPiece)
                 if(opTiles[i].children[j].className === "pieceValue"){
                     opTiles[i].children[j].style.backgroundColor = opColor;
                 }
             }
         }
         //add event listeners to opponents piece so that you can mark them;
+    }
+
+    markOpponetsPiece = (e) => {
+        let allPieces = ["1", '2', '3', '4', '5', '6', '7', '8', 'eng', 'mine', 'flag', 'bomb'];
+        if (e.target.classList[0] === "pieceValue") {
+            let pieceList = document.createElement("ul");
+            pieceList.setAttribute('class', 'piece-list');
+            allPieces.forEach(piece => {
+                    let li = document.createElement("li");
+                    li.setAttribute('class', 'piece-value');
+                    li.innerHTML = piece;
+                    pieceList.appendChild(li);
+                    li.addEventListener("click", () => this.markPiece(e, piece));
+            });
+            e.currentTarget.appendChild(pieceList);
+            let that = e.currentTarget.id;
+            setTimeout(() => {
+                document.addEventListener("click", () => this.closeWindow(that, pieceList), { once: true });
+            }, 10, that, pieceList);
+        }
+    }
+
+    markPiece(e, piece){
+        let pos
+        let target;
+        if (e.target.className === "pieceValue") {
+            pos = e.target.parentNode.id.split(" ");
+            target = e.target.parentNode;
+        }
+        for (let i = 0; i < target.children.length; i++) {
+            if (target.children[i].className === "pieceValue") {
+                target.children[i].innerHTML = piece;
+            }
+        }
+
     }
 
     turnSetUp(player){
