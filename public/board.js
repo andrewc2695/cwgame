@@ -115,6 +115,7 @@ class Board {
         this.highlightedTiles = [];
         this.startTile;
         this.movePiece = this.movePiece.bind(this);
+        this.isTileValid = this.isTileValid.bind(this);
     }
 
     closeWindow = (that, pieceList) => {
@@ -258,7 +259,20 @@ class Board {
         let startTile = this.board[start[0]][start[1]];
         this.start = startTile;
         let moves = [];
-        moves = moves.concat(startTile.connects);
+        let endMoves = [];
+        //moves = moves.concat(startTile.connects);
+        //have to check each piece to see if its empty or if the owner is the opposite then push those to the move array
+        for(let i = 0; i < startTile.connects.length; i++){
+            let posArray = startTile.connects[i].split(",")
+            let posMove = this.board[parseInt(posArray[0])][parseInt(posArray[1])]
+            if(posMove.piece === null){
+                moves.push(posMove);
+            }else{
+                if(this.isTileValid(posMove)){
+                    endMoves.push(posMove);
+                }
+            }
+        }
         if(startTile.candycane === true){
             let i = 0;
             while(i < moves.length){
@@ -267,7 +281,7 @@ class Board {
                 posMoves.forEach(posMove => {
                     let moveArr = posMove.split(",");
                     let newTile = this.board[parseInt(moveArr[0])][parseInt(moveArr[1])];
-                    if(newTile.candycane){
+                    if(newTile.candycane && this.isTileValid(newTile)){
                         if (newTile.row === startTile.row || newTile.col === startTile.col){
                             if(!moves.includes(posMove)){
                                 moves.push(posMove)
@@ -285,6 +299,11 @@ class Board {
             validMove.addEventListener("click", this.movePiece, true);
             validMove.style.boxShadow = "0px 0px 10px 5px yellow";
         });
+    }
+
+    isTileValid(tile){
+        if(tile.player !== this.player) return true
+        return false;
     }
 
     movePiece(e){
@@ -320,6 +339,7 @@ class Board {
             this.highlightedTiles.shift();
         }
         this.socket.emit("move", {start: start, end: end , color: this.player})
+        //do all the logic right here then just send starting tile(to make empty) and winner and then update winner on opponets board
     }
 
     placeOpponentsPieces(pos){
