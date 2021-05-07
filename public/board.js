@@ -277,22 +277,31 @@ class Board {
             let i = 0;
             while(i < moves.length){
                 let move = moves[i].split(", ")
-                debugger
-                let posMoves = this.board[parseInt(move[0])][parseInt(move[1])].connects
-                posMoves.forEach(posMove => {
-                    let moveArr = posMove.split(",");
-                    let newTile = this.board[parseInt(moveArr[0])][parseInt(moveArr[1])];
-                    if(newTile.candycane && this.isTileValid(newTile)){
-                        if (newTile.row === startTile.row || newTile.col === startTile.col){
-                            if(!moves.includes(posMove)){
-                                moves.push(posMove)
+                let posMove = this.board[parseInt(move[0])][parseInt(move[1])]
+                if(posMove.candycane){
+                    let posMoves = posMove.connects;
+                    posMoves.forEach(posMove => {
+                        let moveArr = posMove.split(",");
+                        let newTile = this.board[parseInt(moveArr[0])][parseInt(moveArr[1])];
+                        if(newTile.candycane){
+                            if (newTile.row === startTile.row || newTile.col === startTile.col){
+                                if(newTile.piece === null){
+                                    if (!moves.includes(posMove)) {
+                                        moves.push(posMove)
+                                    }
+                                }else{
+                                    if(this.isTileValid){
+                                        endMoves.push(posMove);
+                                    }
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
                 i++;
             }
         }
+        moves = moves.concat(endMoves);
         moves.forEach(move => {
             move = move.split(",").join("");
             this.highlightedTiles.push(move)
@@ -303,7 +312,6 @@ class Board {
     }
 
     isTileValid(tile){
-        console.log("isTileValid")
         if(tile.player !== this.player) return true
         return false;
     }
