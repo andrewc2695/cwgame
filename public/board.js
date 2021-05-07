@@ -222,7 +222,7 @@ class Board {
             }
         }
 
-        if(Object.keys(this.posObj).length === 1){
+        if(Object.keys(this.posObj).length >= 1){
             let start = document.getElementById("start");
             start.style.display = "block";
             start.addEventListener("click", () => {
@@ -266,24 +266,24 @@ class Board {
             let posArray = startTile.connects[i].split(",")
             let posMove = this.board[parseInt(posArray[0])][parseInt(posArray[1])]
             if(posMove.piece === null){
-                moves.push(posMove);
+                moves.push([posMove.row, posMove.col]);
             }else{
                 if(this.isTileValid(posMove)){
-                    endMoves.push(posMove);
+                    endMoves.push([posMove.row, posMove.col]);
                 }
             }
         }
         if(startTile.candycane === true){
             let i = 0;
             while(i < moves.length){
-                let posArray = moves[i].split(",")
-                let posMoves = this.board[parseInt(posArray[0])][parseInt(posArray[1])].connects
+                let posMoves = this.board[parseInt(moves[i][0])][parseInt(moves[i][1])].connects
                 posMoves.forEach(posMove => {
                     let moveArr = posMove.split(",");
                     let newTile = this.board[parseInt(moveArr[0])][parseInt(moveArr[1])];
                     if(newTile.candycane && this.isTileValid(newTile)){
                         if (newTile.row === startTile.row || newTile.col === startTile.col){
                             if(!moves.includes(posMove)){
+                                debugger
                                 moves.push(posMove)
                             }
                         }
@@ -302,6 +302,7 @@ class Board {
     }
 
     isTileValid(tile){
+        console.log("isTileValid")
         if(tile.player !== this.player) return true
         return false;
     }
