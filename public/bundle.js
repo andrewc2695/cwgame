@@ -291,7 +291,7 @@ class Board {
                                         moves.push(posMove)
                                     }
                                 }else{
-                                    if(this.isTileValid){
+                                    if(this.isTileValid(newTile)){
                                         endMoves.push(posMove);
                                     }
                                 }
@@ -308,7 +308,7 @@ class Board {
             this.highlightedTiles.push(move)
             let validMove = document.getElementById(String(move));
             validMove.addEventListener("click", this.movePiece, true);
-            validMove.style.boxShadow = "0px 0px 10px 5px yellow";
+            validMove.style.boxShadow = "0px 0px 10px 5px darkblue";
         });
     }
 
