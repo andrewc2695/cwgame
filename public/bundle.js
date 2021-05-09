@@ -114,7 +114,7 @@ class Board {
         this.ready = false;
         this.player;
         this.highlightedTiles = [];
-        this.startTile;
+        this.start;
         this.movePiece = this.movePiece.bind(this);
         this.isTileValid = this.isTileValid.bind(this);
     }
@@ -351,6 +351,9 @@ class Board {
         //do all the logic right here then just send starting tile(to make empty) and winner and then update winner on opponets board
         this.socket.emit("move", {start: start, end: end , color: this.player, winner: endTile})
         //when you click to move it opens up that thing to mark op piece
+        setTimeout(() => {
+            this.start = undefined;
+        }, 10)
     }
 
     fight(playerTile, opTile){
@@ -404,23 +407,24 @@ class Board {
     }
 
     markOpponetsPiece = (e) => {
-        debugger
-        let allPieces = ["1", '2', '3', '4', '5', '6', '7', '8', 'eng', 'mine', 'flag', 'bomb'];
-        if (e.target.classList[0] === "pieceValue") {
-            let pieceList = document.createElement("ul");
-            pieceList.setAttribute('class', 'piece-list');
-            allPieces.forEach(piece => {
-                    let li = document.createElement("li");
-                    li.setAttribute('class', 'piece-value');
-                    li.innerHTML = piece;
-                    pieceList.appendChild(li);
-                    li.addEventListener("click", () => this.markPiece(e, piece));
-            });
-            e.currentTarget.appendChild(pieceList);
-            let that = e.currentTarget.id;
-            setTimeout(() => {
-                document.addEventListener("click", () => this.closeWindow(that, pieceList), { once: true });
-            }, 10, that, pieceList);
+        if(this.start === undefined){
+            let allPieces = ["1", '2', '3', '4', '5', '6', '7', '8', 'eng', 'mine', 'flag', 'bomb'];
+            if (e.target.classList[0] === "pieceValue") {
+                let pieceList = document.createElement("ul");
+                pieceList.setAttribute('class', 'piece-list');
+                allPieces.forEach(piece => {
+                        let li = document.createElement("li");
+                        li.setAttribute('class', 'piece-value');
+                        li.innerHTML = piece;
+                        pieceList.appendChild(li);
+                        li.addEventListener("click", () => this.markPiece(e, piece));
+                });
+                e.currentTarget.appendChild(pieceList);
+                let that = e.currentTarget.id;
+                setTimeout(() => {
+                    document.addEventListener("click", () => this.closeWindow(that, pieceList), { once: true });
+                }, 10, that, pieceList);
+            }
         }
     }
 
