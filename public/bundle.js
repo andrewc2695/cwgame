@@ -254,6 +254,7 @@ class Board {
 
 
     getValidMoves = (e) => {
+        this.clearHighlightedTiles();
         let start = e.currentTarget.id.split(" ")
         start[0] = parseInt(start[0]);
         start[1] = parseInt(start[1]);
@@ -318,7 +319,6 @@ class Board {
     }
 
     movePiece(e){
-        // debugger
         let end = e.currentTarget.id.split(" ")
         let target = e.currentTarget;
         end[0] = parseInt(end[0]);
@@ -333,8 +333,10 @@ class Board {
             }
         }
         let endTile = this.board[end[0]][end[1]];
-        let winner = this.fight(this.start, endTile);
-        debugger
+        let winner = this.start;
+        if(endTile.piece){
+            winner = this.fight(this.start, endTile);
+        }
         endTile.piece = winner.piece;
         endTile.player = winner.player;
         this.start.piece = null;
@@ -345,14 +347,8 @@ class Board {
                 target.children[i].style.backgroundColor = endTile.player;
             }
         }
-        while(this.highlightedTiles.length){
-            let validMove = document.getElementById(String(this.highlightedTiles[0]));
-            validMove.style.boxShadow = "";
-            validMove.removeEventListener("click", this.movePiece, true);
-            this.highlightedTiles.shift();
-        }
+        this.clearHighlightedTiles();
         //do all the logic right here then just send starting tile(to make empty) and winner and then update winner on opponets board
-        debugger
         this.socket.emit("move", {start: start, end: end , color: this.player, winner: endTile})
         //when you click to move it opens up that thing to mark op piece
     }
@@ -377,6 +373,14 @@ class Board {
         
     }
 
+    clearHighlightedTiles(){
+        while (this.highlightedTiles.length) {
+            let validMove = document.getElementById(String(this.highlightedTiles[0]));
+            validMove.style.boxShadow = "";
+            validMove.removeEventListener("click", this.movePiece, true);
+            this.highlightedTiles.shift();
+        }
+    }
     placeOpponentsPieces(pos){
         let opPos = Object.keys(pos);
         let opPieces = Object.values(pos);
@@ -400,6 +404,7 @@ class Board {
     }
 
     markOpponetsPiece = (e) => {
+        debugger
         let allPieces = ["1", '2', '3', '4', '5', '6', '7', '8', 'eng', 'mine', 'flag', 'bomb'];
         if (e.target.classList[0] === "pieceValue") {
             let pieceList = document.createElement("ul");
