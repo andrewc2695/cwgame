@@ -332,14 +332,16 @@ class Board {
             }
         }
         let endTile = this.board[end[0]][end[1]];
-        endTile.piece = this.start.piece;
-        endTile.player = this.start.player;
+        let winner = this.fight(this.start, endTile);
+        debugger
+        endTile.piece = winner.piece;
+        endTile.player = winner.player;
         this.start.piece = null;
         this.start.player = null
         for (let i = 0; i < target.children.length; i++) {
             if (target.children[i].className === "pieceValue") {
-                target.children[i].innerHTML = endTile.piece;
-                target.children[i].style.backgroundColor = this.player;
+                target.children[i].innerHTML = (endTile.player === this.player ? endTile.piece : "");
+                target.children[i].style.backgroundColor = endTile.player;
             }
         }
         while(this.highlightedTiles.length){
@@ -348,19 +350,42 @@ class Board {
             validMove.removeEventListener("click", this.movePiece, true);
             this.highlightedTiles.shift();
         }
-        this.socket.emit("move", {start: start, end: end , color: this.player})
         //do all the logic right here then just send starting tile(to make empty) and winner and then update winner on opponets board
+        debugger
+        this.socket.emit("move", {start: start, end: end , color: this.player, winner: endTile})
+        //when you click to move it opens up that thing to mark op piece
+    }
+
+    fight(playerTile, opTile){
+        //number vs number
+        //number vs NaN
+        //NaN vs Nan
+        if(parseInt(playerTile.piece) > 0 && parseInt(opTile.piece) > 0){
+            if (parseInt(playerTile.piece) > parseInt(opTile.piece)){
+                return playerTile
+            } else if (parseInt(playerTile.piece) < parseInt(opTile.piece)){
+                return opTile;
+            }else{
+                opTile.piece = null;
+                opTile.player = 'white';
+                return opTile;
+            }
+        }else{
+            debugger
+        }
+        
     }
 
     placeOpponentsPieces(pos){
         let opPos = Object.keys(pos);
         let opPieces = Object.values(pos);
+        let opColor = (this.player === "green" ? "yellow" : "green");
         for(let z = 0; z < opPos.length; z++){
             let opTile =opPos[z].split(" ");
             this.board[parseInt(opTile[0])][parseInt(opTile[1])].piece = opPieces[z];
+            this.board[parseInt(opTile[0])][parseInt(opTile[1])].player = opColor;
         }
         let opPlayer = (this.player === "green" ? "p2" : "p1");
-        let opColor = (this.player === "green" ? "yellow" : "green");
         let opTiles = document.getElementsByClassName(opPlayer);
         for(let i = 0; i < opTiles.length; i++){
             for(let j = 0; j < opTiles[i].children.length; j++){

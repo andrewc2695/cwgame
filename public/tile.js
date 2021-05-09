@@ -6,7 +6,7 @@ class Tile {
         this.safe = info.safe;
         this.candycane = info.candycane;
         this.connects = info.connects;
-        this.player = info.player;
+        this.player = null;
     }
 }
 
