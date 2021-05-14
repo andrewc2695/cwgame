@@ -450,11 +450,20 @@ class Board {
     }
 
     turnSetUp(player){
-        if(player === this.player){
-            let pNumber = (this.player === "green" ? "p1" : "p2")
-            let myTiles = document.getElementsByClassName(pNumber);
-            for (let i = 0; i < myTiles.length; i++) {
-                myTiles[i].addEventListener("click", this.getValidMoves) //add this when its your turn
+        // if(player === this.player){
+        //     let pNumber = (this.player === "green" ? "p1" : "p2")
+        //     let myTiles = document.getElementsByClassName(pNumber);
+        //     for (let i = 0; i < myTiles.length; i++) {
+        //         myTiles[i].addEventListener("click", this.getValidMoves) //add this when its your turn
+        //     }
+        // }
+        for(let i = 0; i < this.board.length; i++){
+            for(let j = 0; j < this.board[i].length; j++){
+                if (this.board[i][j] !== null && this.board[i][j].player === player){
+                    let id = [this.board[i][j].row, this.board[i][j].col].join(" ");
+                    let tile = document.getElementById(id);
+                    tile.addEventListener("click", this.getValidMoves)
+                }
             }
         }
     }
