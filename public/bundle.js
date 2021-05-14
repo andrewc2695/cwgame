@@ -348,6 +348,8 @@ class Board {
             }
         }
         this.clearHighlightedTiles();
+        let nextColor = (this.player === "green" ? "yellow" : 'green');
+        this.turnSetUp(nextColor);
         //do all the logic right here then just send starting tile(to make empty) and winner and then update winner on opponets board
 
         this.socket.emit("move", {start: [this.start.row, this.start.col], end: end , color: this.player, winner: endTile})
@@ -458,16 +460,30 @@ class Board {
         //         myTiles[i].addEventListener("click", this.getValidMoves) //add this when its your turn
         //     }
         // }
+        this.removeEventListeners();
         for(let i = 0; i < this.board.length; i++){
             for(let j = 0; j < this.board[i].length; j++){
                 if (this.board[i][j] !== null && this.board[i][j].player === player && player === this.player){
                     let id = [this.board[i][j].row, this.board[i][j].col].join(" ");
                     let tile = document.getElementById(id);
                     tile.addEventListener("click", this.getValidMoves)
-                }else if(this.board[i][j] !== null && this.board[i][j].player !== null){
+                }else if(this.board[i][j] !== null && this.board[i][j].player !== null && this.player !== player){
                     let id = [this.board[i][j].row, this.board[i][j].col].join(" ");
                     let tile = document.getElementById(id);
                     tile.addEventListener("click", this.markOpponetsPiece)
+                }
+            }
+        }
+    }
+
+    removeEventListeners(){
+        for (let i = 0; i < this.board.length; i++) {
+            for (let j = 0; j < this.board[i].length; j++) {
+                if (this.board[i][j] !== null ){
+                    let id = [this.board[i][j].row, this.board[i][j].col].join(" ");
+                    let tile = document.getElementById(id);
+                    tile.removeEventListener("click", this.getValidMoves)
+                    tile.removeEventListener("click", this.markOpponetsPiece)
                 }
             }
         }
@@ -496,6 +512,7 @@ class Board {
         }
         endTile.piece = winner.piece;
         endTile.player = winner.player;
+        this.turnSetUp(this.player);
     }
     
 }
