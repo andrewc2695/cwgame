@@ -28,6 +28,10 @@ socket.on("bothReady", (msg) => {
     gameBoard.turnSetUp(color);
 })
 
+socket.on("move", (msg) => {
+    gameBoard.opponentsMove(msg);
+})
+
 
 // const squares = document.getElementsByClassName("square");
 

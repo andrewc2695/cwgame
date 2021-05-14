@@ -349,15 +349,15 @@ class Board {
         }
         this.clearHighlightedTiles();
         //do all the logic right here then just send starting tile(to make empty) and winner and then update winner on opponets board
-        this.socket.emit("move", {start: start, end: end , color: this.player, winner: endTile})
-        //when you click to move it opens up that thing to mark op piece
+
+        this.socket.emit("move", {start: [this.start.row, this.start.col], end: end , color: this.player, winner: endTile})
         setTimeout(() => {
             this.start = undefined;
         }, 10)
     }
 
     fight(playerTile, opTile){
-        //number vs number
+        //number vs number: done
         //number vs NaN
         //NaN vs Nan
         if(parseInt(playerTile.piece) > 0 && parseInt(opTile.piece) > 0){
@@ -429,7 +429,7 @@ class Board {
     }
 
     markPiece(e, piece){
-        let pos
+        let pos;
         let target;
         if (e.target.className === "pieceValue") {
             pos = e.target.parentNode.id.split(" ");
@@ -450,6 +450,29 @@ class Board {
                 myTiles[i].addEventListener("click", this.getValidMoves) //add this when its your turn
             }
         }
+    }
+
+    opponentsMove(move){
+        const {start, end, winner } = move;
+        let startTile = this.board[start[0]][start[1]];
+        startTile.piece = null;
+        startTile.player = null;
+        for (let i = 0; i < startTile.children.length; i++) {
+            if (startTile.children[i].className === "pieceValue") {
+                startTile.children[i].innerHTML = "";
+                startTile.children[i].style.backgroundColor = "white"
+            }
+        }
+
+        let endTile = this.board[end[0]][end[1]];
+        for (let i = 0; i < target.children.length; i++) {
+            if (target.children[i].className === "pieceValue") {
+                target.children[i].innerHTML = (winner.player === this.player ? winner.piece : "");
+                target.children[i].style.backgroundColor = endTile.player;
+            }
+        }
+        endTile.piece = winner.piece;
+        endTile.player = winner.player;
     }
     
 }
@@ -484,6 +507,10 @@ socket.on("setup", (msg) => {
 socket.on("bothReady", (msg) => {
     let color = (msg === "green" ? "yellow" : "green")
     gameBoard.turnSetUp(color);
+})
+
+socket.on("move", (msg) => {
+    gameBoard.opponentsMove(msg);
 })
 
 
