@@ -5,3 +5,5 @@ todos:
 - turn switching
     after a player moves remove all event lsiteners for moving/marking pieces then when turn set up happens again they can be added back on
     have a remove event lsiteners function?
+- engineers need there own move method?
+- piece hitting a mine gives an error

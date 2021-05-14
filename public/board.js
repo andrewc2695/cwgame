@@ -380,7 +380,7 @@ class Board {
             return opTile;
         }else if(playerTile.piece === 'engineer' && opTile.piece === 'mine'){
             return playerTile;
-        }else if(opTile === 'mine'){
+        }else if(opTile.piece === 'mine'){
             return opTile
         }
     }
