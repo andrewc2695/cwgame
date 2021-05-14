@@ -404,7 +404,7 @@ class Board {
         let opTiles = document.getElementsByClassName(opPlayer);
         for(let i = 0; i < opTiles.length; i++){
             for(let j = 0; j < opTiles[i].children.length; j++){
-                opTiles[i].addEventListener("click", this.markOpponetsPiece)
+                // opTiles[i].addEventListener("click", this.markOpponetsPiece)
                 if(opTiles[i].children[j].className === "pieceValue"){
                     opTiles[i].children[j].style.backgroundColor = opColor;
                 }
@@ -459,10 +459,14 @@ class Board {
         // }
         for(let i = 0; i < this.board.length; i++){
             for(let j = 0; j < this.board[i].length; j++){
-                if (this.board[i][j] !== null && this.board[i][j].player === player){
+                if (this.board[i][j] !== null && this.board[i][j].player === player && player === this.player){
                     let id = [this.board[i][j].row, this.board[i][j].col].join(" ");
                     let tile = document.getElementById(id);
                     tile.addEventListener("click", this.getValidMoves)
+                }else if(this.board[i][j] !== null && this.board[i][j].player !== null && this.player !== player){
+                    let id = [this.board[i][j].row, this.board[i][j].col].join(" ");
+                    let tile = document.getElementById(id);
+                    tile.addEventListener("click", this.markOpponetsPiece)
                 }
             }
         }
