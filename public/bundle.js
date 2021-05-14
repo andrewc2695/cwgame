@@ -457,18 +457,20 @@ class Board {
         let startTile = this.board[start[0]][start[1]];
         startTile.piece = null;
         startTile.player = null;
-        for (let i = 0; i < startTile.children.length; i++) {
-            if (startTile.children[i].className === "pieceValue") {
-                startTile.children[i].innerHTML = "";
-                startTile.children[i].style.backgroundColor = "white"
+        let startHTML = document.getElementById(start.join(" "))
+        for (let i = 0; i < startHTML.children.length; i++) {
+            if (startHTML.children[i].className === "pieceValue") {
+                startHTML.children[i].innerHTML = "";
+                startHTML.children[i].style.backgroundColor = "white"
             }
         }
 
         let endTile = this.board[end[0]][end[1]];
-        for (let i = 0; i < target.children.length; i++) {
-            if (target.children[i].className === "pieceValue") {
-                target.children[i].innerHTML = (winner.player === this.player ? winner.piece : "");
-                target.children[i].style.backgroundColor = endTile.player;
+        let endHTML = document.getElementById(end.join(" "));
+        for (let i = 0; i < endHTML.children.length; i++) {
+            if (endHTML.children[i].className === "pieceValue") {
+                endHTML.children[i].innerHTML = (winner.player === this.player ? winner.piece : "");
+                endHTML.children[i].style.backgroundColor = endTile.player;
             }
         }
         endTile.piece = winner.piece;
