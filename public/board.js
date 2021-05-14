@@ -356,9 +356,6 @@ class Board {
     }
 
     fight(playerTile, opTile){
-        //number vs number: done
-        //number vs NaN
-        //NaN vs Nan
         if(parseInt(playerTile.piece) > 0 && parseInt(opTile.piece) > 0){
             if (parseInt(playerTile.piece) > parseInt(opTile.piece)){
                 return playerTile
@@ -369,10 +366,21 @@ class Board {
                 opTile.player = 'white';
                 return opTile;
             }
-        }else{
-            debugger
+        }else if(playerTile.piece === opTile.piece){
+            opTile.piece = null;
+            opTile.player = 'white';
+            return opTile;
+        }else if(playerTile.piece === "bomb" || opTile.piece === "bomb"){
+            opTile.piece = null;
+            opTile.player = 'white';
+            return opTile;
+        }else if(playerTile.piece === 'engineer' && opTile.piece !== 'mine'){
+            return opTile;
+        }else if(playerTile.piece === 'engineer' && opTile.piece === 'mine'){
+            return playerTile;
+        }else if(opTile === 'mine'){
+            return opTile
         }
-        
     }
 
     clearHighlightedTiles(){
@@ -469,7 +477,7 @@ class Board {
         for (let i = 0; i < endHTML.children.length; i++) {
             if (endHTML.children[i].className === "pieceValue") {
                 endHTML.children[i].innerHTML = (winner.player === this.player ? winner.piece : "");
-                endHTML.children[i].style.backgroundColor = endTile.player;
+                endHTML.children[i].style.backgroundColor = winner.player;
             }
         }
         endTile.piece = winner.piece;
