@@ -154,7 +154,7 @@ class Board {
 
     validPlacement(pos, piece) {
         if (piece === "flag") {
-            if (pos[0] !== "0" && pos[0] !== "0") {
+            if (pos[0] !== "0" && pos[0] !== "14") {
                 window.alert("Flag can only be placed in tiles with Blue border")
                 return false
             } else if (pos[1] !== "1" && pos[1] !== "3") {
@@ -336,6 +336,21 @@ class Board {
         if(endTile.piece){
             winner = this.fight(this.start, endTile);
         }
+        if((this.start.piece === "8" || endTile.piece === "8") && winner.piece !== 8){
+            let flag1;
+            let flag2;
+            if(this.player === "green"){
+                flag1 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
+                flag2 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
+            }else{
+                flag2 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
+                flag1 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
+            }
+            let flags = [];
+            if(this.start.piece === "8") flags.push(flag1);
+            if(endTile.piece === "8") flags.push(flag1);
+            this.flipFlag(flags);
+        }
         endTile.piece = winner.piece;
         endTile.player = winner.player;
         this.start.piece = null;
@@ -512,6 +527,19 @@ class Board {
         endTile.piece = winner.piece;
         endTile.player = winner.player;
         this.turnSetUp(this.player);
+    }
+
+    flipFlag(flags){
+        flags.forEach((flag) => {
+            let htmlflag = document.getElementById(flag);
+            htmlflag.style.boxShadow = "0px 0px 10px 5px red"
+            for (let i = 0; i < htmlflag.children.length; i++) {
+                if (htmlflag.children[i].className === "pieceValue") {
+                    htmlflag.children[i].innerHTML = "flag";
+                }
+            }
+
+        })
     }
     
 }
