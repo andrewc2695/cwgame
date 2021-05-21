@@ -334,23 +334,24 @@ class Board {
         }
         let endTile = this.board[end[0]][end[1]];
         let winner = this.start;
-        if(endTile.piece){
-            winner = this.fight(this.start, endTile);
-        }
-        if((this.start.piece === "8" || endTile.piece === "8") && winner.piece !== 8){
+        if ((this.start.piece === "8" || endTile.piece === "8") && winner.piece !== 8) {
             let flag1;
             let flag2;
-            if(this.player === "green"){
+            if (this.player === "green") {
                 flag1 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
                 flag2 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
-            }else{
+            } else {
                 flag2 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
                 flag1 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
             }
             let flags = [];
-            if(this.start.piece === "8") flags.push(flag1);
-            if(endTile.piece === "8") flags.push(flag1);
+            if (this.start.piece === "8") flags.push(flag1);
+            if (endTile.piece === "8") flags.push(flag2);
+            debugger;
             this.flipFlag(flags);
+        }
+        if(endTile.piece){
+            winner = this.fight(this.start, endTile);
         }
         endTile.piece = winner.piece;
         endTile.player = winner.player;
@@ -531,7 +532,6 @@ class Board {
     }
 
     flipFlag(flags){
-        debugger
         flags.forEach((flag) => {
             let htmlflag = document.getElementById(flag);
             htmlflag.style.boxShadow = "0px 0px 10px 5px red"

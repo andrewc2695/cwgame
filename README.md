@@ -3,7 +3,7 @@ todos:
 - change the interval to check for ready to to just have the baord emit its ready
 - when fighting have to check to see if an 8 was lost;
 - engineers need there own move method?
-- piece hitting a mine gives an error - ithink i fixed it
+- piece hitting a mine gives an error - i think i fixed it
 - host to heroku
 
 future things
