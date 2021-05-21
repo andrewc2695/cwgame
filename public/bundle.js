@@ -334,6 +334,7 @@ class Board {
         }
         let endTile = this.board[end[0]][end[1]];
         let winner = this.start;
+        let flags = [];
         if(endTile.piece){
             let startT = this.start.piece;
             let endT = endTile.piece
@@ -348,7 +349,6 @@ class Board {
                     flag2 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
                     flag1 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
                 }
-                let flags = [];
                 if (startT=== "8") flags.push(flag1);
                 if (endT === "8") flags.push(flag2);
                 debugger;
@@ -370,7 +370,7 @@ class Board {
         this.turnSetUp(nextColor);
         //do all the logic right here then just send starting tile(to make empty) and winner and then update winner on opponets board
 
-        this.socket.emit("move", {start: [this.start.row, this.start.col], end: end , color: this.player, winner: endTile})
+        this.socket.emit("move", {start: [this.start.row, this.start.col], end: end , color: this.player, winner: endTile, flags: flags})
         setTimeout(() => {
             this.start = undefined;
         }, 10)
@@ -530,6 +530,7 @@ class Board {
         }
         endTile.piece = winner.piece;
         endTile.player = winner.player;
+        this.flipFlag(move.flags);
         this.turnSetUp(this.player);
     }
 
