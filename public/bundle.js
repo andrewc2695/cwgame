@@ -334,24 +334,26 @@ class Board {
         }
         let endTile = this.board[end[0]][end[1]];
         let winner = this.start;
-        if ((this.start.piece === "8" || endTile.piece === "8") && winner.piece !== 8) {
-            let flag1;
-            let flag2;
-            if (this.player === "green") {
-                flag1 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
-                flag2 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
-            } else {
-                flag2 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
-                flag1 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
-            }
-            let flags = [];
-            if (this.start.piece === "8") flags.push(flag1);
-            if (endTile.piece === "8") flags.push(flag2);
-            debugger;
-            this.flipFlag(flags);
-        }
         if(endTile.piece){
+            let startT = this.start.piece;
+            let endT = endTile.piece
             winner = this.fight(this.start, endTile);
+            if ((startT === "8" || endT === "8") && winner.piece !== 8) {
+                let flag1;
+                let flag2;
+                if (this.player === "green") {
+                    flag1 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
+                    flag2 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
+                } else {
+                    flag2 = (this.board[0][1].piece === "flag" ? "0 1" : "0 3");
+                    flag1 = (this.board[14][1].piece === "flag" ? "14 1" : "14 3");
+                }
+                let flags = [];
+                if (startT=== "8") flags.push(flag1);
+                if (endT === "8") flags.push(flag2);
+                debugger;
+                this.flipFlag(flags);
+            }
         }
         endTile.piece = winner.piece;
         endTile.player = winner.player;
