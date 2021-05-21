@@ -83,9 +83,9 @@ class Board {
                 new Tile({ row: 12, col: 4, piece: null, safe: false, candycane: true, connects: ['12, 3', '11, 4', '13, 4'] }),
             ],
             [new Tile({ row: 13, col: 0, piece: null, safe: false, candycane: true, connects: ['13, 1', '12, 0', '14, 0', '12, 1'] }),
-                new Tile({ row: 13, col: 1, piece: null, safe: false, candycane: false, connects: ['13, 0', '13, 2', '12, 1', '14, 1'] }),
-                new Tile({ row: 13, col: 2, piece: null, safe: false, candycane: false, connects: ['13, 1', '13, 3', '12, 2', '12, 1', '12, 3', '14, 2'] }),
-                new Tile({ row: 13, col: 3, piece: null, safe: false, candycane: false, connects: ['13, 2', '13, 4', '12, 3', '14, 3']}),
+                new Tile({ row: 13, col: 1, piece: null, safe: false, candycane: true, connects: ['13, 0', '13, 2', '12, 1', '14, 1'] }),
+                new Tile({ row: 13, col: 2, piece: null, safe: false, candycane: true, connects: ['13, 1', '13, 3', '12, 2', '12, 1', '12, 3', '14, 2'] }),
+                new Tile({ row: 13, col: 3, piece: null, safe: false, candycane: true, connects: ['13, 2', '13, 4', '12, 3', '14, 3']}),
                 new Tile({ row: 13, col: 4, piece: null, safe: false, candycane: true, connects: ['13, 3', '12, 4', '14, 4', '12, 3']})
             ], 
             [new Tile({ row: 14, col: 0, piece: null, safe: false, candycane: false, connects: ['14, 1', '13, 0'] }),
@@ -285,7 +285,8 @@ class Board {
                         let moveArr = posMove.split(",");
                         let newTile = this.board[parseInt(moveArr[0])][parseInt(moveArr[1])];
                         if(newTile.candycane){
-                            if (newTile.row === startTile.row || newTile.col === startTile.col){
+                            let condition = (startTile.piece === "engineer" ? true : (newTile.row === startTile.row || newTile.col === startTile.col))
+                            if(condition){
                                 if(newTile.piece === null){
                                     if (!moves.includes(posMove)) {
                                         moves.push(posMove)
@@ -313,6 +314,7 @@ class Board {
     }
 
     isTileValid(tile){
+        if(tile.safe) return false;
         if(tile.player !== this.player) return true
         return false;
     }
@@ -350,7 +352,6 @@ class Board {
                 }
                 if (startT === "8") flags.push(flag1);
                 if (endT === "8") flags.push(flag2);
-                debugger;
                 this.flipFlag(flags);
             }
         }
@@ -487,7 +488,7 @@ class Board {
                 }else if(this.board[i][j] !== null && this.board[i][j].player !== null && this.player !== player){
                     let id = [this.board[i][j].row, this.board[i][j].col].join(" ");
                     let tile = document.getElementById(id);
-                    tile.addEventListener("click", this.markOpponetsPiece)
+                    // tile.addEventListener("click", this.markOpponetsPiece)
                 }
             }
         }
