@@ -227,7 +227,6 @@ class Board {
             start.style.display = "block";
             start.addEventListener("click", () => {
                 this.ready = true;
-                console.log(this.ready);
                 let player = (this.player === "green" ? "p1" : "p2");
                 let myTiles = document.getElementsByClassName(player);
                 for (let i = 0; i < myTiles.length; i++) {
