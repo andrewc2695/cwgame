@@ -33,7 +33,12 @@ io.on('connection', function(socket) {
     socket.on("switchTurns", (msg) => {
         socket.broadcast.emit('switchTurns', msg)
     })
+
+    socket.on("disconnect", (msg) => {
+        console.log("disconnect");
+    })
 });
+
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html')
@@ -43,3 +48,4 @@ http.listen(port, function(){
     console.log('listening on *: ' + port);
 });
 
+//have a welcome page then another apge to join room
