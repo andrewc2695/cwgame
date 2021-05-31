@@ -527,6 +527,11 @@ class Board {
                 endHTML.children[i].style.backgroundColor = winner.player;
             }
         }
+
+        startHTML.style.boxShadow = "0px 0px 10px 5px black"
+        endHTML.style.boxShadow = "0px 0px 10px 5px black"
+        this.highlightedTiles.push(start.join(" "));
+        this.highlightedTiles.push(end.join(" "));
         endTile.piece = winner.piece;
         endTile.player = winner.player;
         this.flipFlag(move.flags);

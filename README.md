@@ -7,6 +7,7 @@ todos:
 - piece hitting a mine gives an error - done
 - host to heroku - done
 - have a room set up in the beginning so that people can actually play htis game
+- make all the manual dom changesl ike its own method or osmething
 
 
 future things
