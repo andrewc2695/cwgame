@@ -6,7 +6,7 @@ let port = process.env.PORT || 3000;
 
 let io = require('socket.io')(http);
 
-const players = [];
+let  players = [];
 let playersReady = 0;
 
 io.on('connection', function(socket) {
@@ -35,7 +35,7 @@ io.on('connection', function(socket) {
     })
 
     socket.on("disconnect", (msg) => {
-        console.log("disconnect");
+        players = [];
     })
 });
 
