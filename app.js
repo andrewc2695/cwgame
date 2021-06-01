@@ -36,6 +36,7 @@ io.on('connection', function(socket) {
 
     socket.on("disconnect", (msg) => {
         players = [];
+        playersReady = 0;
     })
 });
 
