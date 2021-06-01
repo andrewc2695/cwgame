@@ -412,6 +412,7 @@ class Board {
             this.highlightedTiles.shift();
         }
     }
+
     placeOpponentsPieces(pos){
         let opPos = Object.keys(pos);
         let opPieces = Object.values(pos);
@@ -428,6 +429,7 @@ class Board {
                 // opTiles[i].addEventListener("click", this.markOpponetsPiece)
                 if(opTiles[i].children[j].className === "pieceValue"){
                     opTiles[i].children[j].style.backgroundColor = opColor;
+                    // if (this.player > 2) opTiles[i].children[j].innerHTML = winner.piece;
                 }
             }
         }
@@ -525,6 +527,7 @@ class Board {
         for (let i = 0; i < endHTML.children.length; i++) {
             if (endHTML.children[i].className === "pieceValue") {
                 endHTML.children[i].innerHTML = (winner.player === this.player ? winner.piece : "");
+                if(this.player > 2) endHTML.children[i].innerHTML = winner.piece;
                 endHTML.children[i].style.backgroundColor = winner.player;
             }
         }
