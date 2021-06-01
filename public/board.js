@@ -222,7 +222,7 @@ class Board {
             }
         }
 
-        if(Object.keys(this.posObj).length >= 1){
+        if(Object.keys(this.posObj).length >= 25){
             let start = document.getElementById("start");
             start.style.display = "block";
             start.addEventListener("click", () => {
@@ -415,20 +415,22 @@ class Board {
     placeOpponentsPieces(pos){
         let opPos = Object.keys(pos);
         let opPieces = Object.values(pos);
-        let opColor = (this.player === "green" ? "yellow" : "green");
+        debugger
+        // let opColor = (this.player === "green" ? "yellow" : "green");
+        let opColor = (parseInt(opPos[0].split(" ")[0]) <= 5 ? "green" : "yellow");
         for(let z = 0; z < opPos.length; z++){
-            let opTile =opPos[z].split(" ");
+            let opTile = opPos[z].split(" ");
             this.board[parseInt(opTile[0])][parseInt(opTile[1])].piece = opPieces[z];
             this.board[parseInt(opTile[0])][parseInt(opTile[1])].player = opColor;
         }
-        let opPlayer = (this.player === "green" ? "p2" : "p1");
+        let opPlayer = (parseInt(opPos[0].split(" ")[0]) > 5 ? "p2" : "p1");
         let opTiles = document.getElementsByClassName(opPlayer);
         for(let i = 0; i < opTiles.length; i++){
             for(let j = 0; j < opTiles[i].children.length; j++){
                 // opTiles[i].addEventListener("click", this.markOpponetsPiece)
                 if(opTiles[i].children[j].className === "pieceValue"){
                     opTiles[i].children[j].style.backgroundColor = opColor;
-                    // if (this.player > 2) opTiles[i].children[j].innerHTML = winner.piece;
+                    // if (this.player > 2) opTiles[i].children[j].innerHTML = opPieces[i].piece;
                 }
             }
         }
@@ -526,7 +528,7 @@ class Board {
         for (let i = 0; i < endHTML.children.length; i++) {
             if (endHTML.children[i].className === "pieceValue") {
                 endHTML.children[i].innerHTML = (winner.player === this.player ? winner.piece : "");
-                if(this.player > 2) endHTML.children[i].innerHTML = winner.piece;
+                // if(this.player > 2) endHTML.children[i].innerHTML = winner.piece;
                 endHTML.children[i].style.backgroundColor = winner.player;
             }
         }

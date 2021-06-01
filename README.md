@@ -8,9 +8,9 @@ todos:
 - host to heroku - done
 - have a room set up in the beginning so that people can actually play htis game
 - make all the manual dom changesl ike its own method or osmething
+- spectators cant see yellows inital starting pieces
 
 
 future things
-- have box shadows around pieces that just moved so you know what happened
 - have the mark opponets piece event listener => then find a way to keep the marked number when it moves
 - change the interval to check for ready to to just have the baord emit its ready
