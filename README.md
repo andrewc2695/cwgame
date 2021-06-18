@@ -9,6 +9,9 @@ todos:
 - have a room set up in the beginning so that people can actually play htis game
 - make all the manual dom changesl ike its own method or osmething
 - spectators cant see yellows inital starting pieces
+- mines and flags  can move
+- no method if a flag gets ttacked
+- 12 2 error on moving down from sanctuary
 
 
 future things

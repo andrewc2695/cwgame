@@ -68,7 +68,7 @@ class Board {
                 new Tile({ row: 10, col: 1, piece: null, safe: true, candycane: false, connects: ['10, 0', '10, 2', '9, 1', '11, 1', '9, 0', '9, 2', '11, 0', '11, 2'] }),
                 new Tile({ row: 10, col: 2, piece: null, safe: false, candycane: false, connects: ['10, 1', '10, 3', '9, 2', '11, 2'] }),
                 new Tile({ row: 10, col: 3, piece: null, safe: true, candycane: false, connects: ['10, 2', '10, 4', '9, 3', '11, 3', '9, 2', '9, 4', '11, 2', '11, 4'] }),
-                new Tile({ row: 2, col: 4, piece: null, safe: false, candycane: true, connects: ['10, 3', '9, 4', '11, 4'] }),
+                new Tile({ row: 10, col: 4, piece: null, safe: false, candycane: true, connects: ['10, 3', '9, 4', '11, 4'] }),
             ],
             [new Tile({ row: 11, col: 0, piece: null, safe: false, candycane: true, connects: ['11, 1', '10, 0', '12, 0', '10, 1', '12, 1'] }),
                 new Tile({ row: 11, col: 1, piece: null, safe: false, candycane: false, connects: ['11, 0', '11, 2', '10, 1', '12, 1'] }),
